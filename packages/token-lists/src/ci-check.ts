@@ -1,7 +1,7 @@
-import srcDefault from "./tokens/pancakeswap-default.json";
-import srcExtended from "./tokens/pancakeswap-extended.json";
-import srcTop100 from "./tokens/pancakeswap-top-100.json";
-import srcTop15 from "./tokens/pancakeswap-top-15.json";
+import srcDefault from "./tokens/envoys-default.json";
+import srcExtended from "./tokens/envoys-extended.json";
+import srcTop100 from "./tokens/envoys-top-100.json";
+import srcTop15 from "./tokens/envoys-top-15.json";
 import defaultList from "../lists/envoys-default.json";
 import extendedtList from "../lists/envoys-extended.json";
 import top15List from "../lists/envoys-top-15.json";
@@ -9,22 +9,22 @@ import top100tList from "../lists/envoys-top-100.json";
 
 const lists = [
   {
-    name: "pancakeswap-default",
+    name: "envoys-default",
     src: srcDefault,
     actual: defaultList,
   },
   {
-    name: "pancakeswap-extended",
+    name: "envoys-extended",
     src: srcExtended,
     actual: extendedtList,
   },
   {
-    name: "pancakeswap-top-15",
+    name: "envoys-top-15",
     src: srcTop15,
     actual: top15List,
   },
   {
-    name: "pancakeswap-top-100",
+    name: "envoys-top-100",
     src: srcTop100,
     actual: top100tList,
   },

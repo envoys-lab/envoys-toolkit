@@ -10,7 +10,7 @@
     "es6": true,
     "jest": true
   },
-  "extends": "@envoysvision/eslint-config-pancake",
+  "extends": "@envoysvision/eslint-config-envoys",
   "rules": {
     "no-console": ["warn", { "allow": ["info", "warn", "error"] }]
   }

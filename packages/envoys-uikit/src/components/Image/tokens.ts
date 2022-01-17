@@ -1,5 +1,5 @@
 /**
- * @see https://github.com/pancakeswap/pancake-frontend/blob/develop/src/config/constants/tokens.ts
+ * @see https://github.com/envoys-lab/envoys-frontend/blob/develop/src/config/constants/tokens.ts
  */
 const tokens = {
   cake: {
@@ -36,7 +36,7 @@ const tokens = {
       97: "",
     },
     decimals: 18,
-    projectLink: "https://pancakebunny.finance/",
+    projectLink: "https://envoysbunny.finance/",
   },
   alice: {
     symbol: "ALICE",

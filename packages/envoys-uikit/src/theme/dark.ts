@@ -19,7 +19,7 @@ const darkTheme: DefaultTheme = {
   toggle: darkToggle,
   nav: darkNav,
   modal: darkModal,
-  pancakeToggle: darkEnvoysToggle,
+  envoysToggle: darkEnvoysToggle,
   radio: darkRadio,
   tooltip: darkTooltip,
 };

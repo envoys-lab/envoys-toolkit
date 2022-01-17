@@ -1,14 +1,14 @@
 import fs from "fs";
 import path from "path";
 import { TokenList } from "@uniswap/token-lists";
-import { version as pancakeswapDefaultVersion } from "../lists/envoys-default.json";
-import { version as pancakeswapExtendedVersion } from "../lists/envoys-extended.json";
-import { version as pancakeswapTop15Version } from "../lists/envoys-top-15.json";
-import { version as pancakeswapTop100Version } from "../lists/envoys-top-100.json";
-import pancakeswapDefault from "./tokens/pancakeswap-default.json";
-import pancakeswapExtended from "./tokens/pancakeswap-extended.json";
-import pancakeswapTop100 from "./tokens/pancakeswap-top-100.json";
-import pancakeswapTop15 from "./tokens/pancakeswap-top-15.json";
+import { version as envoysDefaultVersion } from "../lists/envoys-default.json";
+import { version as envoysExtendedVersion } from "../lists/envoys-extended.json";
+import { version as envoysTop15Version } from "../lists/envoys-top-15.json";
+import { version as envoysTop100Version } from "../lists/envoys-top-100.json";
+import envoysDefault from "./tokens/envoys-default.json";
+import envoysExtended from "./tokens/envoys-extended.json";
+import envoysTop100 from "./tokens/envoys-top-100.json";
+import envoysTop15 from "./tokens/envoys-top-15.json";
 
 export enum VersionBump {
   "major" = "major",
@@ -23,41 +23,41 @@ type Version = {
 };
 
 const lists = {
-  "pancakeswap-default": {
-    list: pancakeswapDefault,
+  "envoys-default": {
+    list: envoysDefault,
     name: "EnvoysSwap Default",
-    keywords: ["pancakeswap", "default"],
+    keywords: ["envoys", "default"],
     logoURI:
       "https://assets.trustwalletapp.com/blockchains/smartchain/assets/0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82/logo.png",
     sort: false,
-    currentVersion: pancakeswapDefaultVersion,
+    currentVersion: envoysDefaultVersion,
   },
-  "pancakeswap-extended": {
-    list: pancakeswapExtended,
+  "envoys-extended": {
+    list: envoysExtended,
     name: "EnvoysSwap Extended",
-    keywords: ["pancakeswap", "extended"],
+    keywords: ["envoys", "extended"],
     logoURI:
       "https://assets.trustwalletapp.com/blockchains/smartchain/assets/0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82/logo.png",
     sort: true,
-    currentVersion: pancakeswapExtendedVersion,
+    currentVersion: envoysExtendedVersion,
   },
-  "pancakeswap-top-100": {
-    list: pancakeswapTop100,
+  "envoys-top-100": {
+    list: envoysTop100,
     name: "EnvoysSwap Top 100",
-    keywords: ["pancakeswap", "top 100"],
+    keywords: ["envoys", "top 100"],
     logoURI:
       "https://assets.trustwalletapp.com/blockchains/smartchain/assets/0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82/logo.png",
     sort: true,
-    currentVersion: pancakeswapTop100Version,
+    currentVersion: envoysTop100Version,
   },
-  "pancakeswap-top-15": {
-    list: pancakeswapTop15,
+  "envoys-top-15": {
+    list: envoysTop15,
     name: "EnvoysSwap Top 15",
-    keywords: ["pancakeswap", "top 15"],
+    keywords: ["envoys", "top 15"],
     logoURI:
       "https://assets.trustwalletapp.com/blockchains/smartchain/assets/0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82/logo.png",
     sort: true,
-    currentVersion: pancakeswapTop15Version,
+    currentVersion: envoysTop15Version,
   },
 };
 

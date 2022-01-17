@@ -1,12 +1,12 @@
 {
-  "name": "@envoysvision/eslint-config-pancake",
+  "name": "@envoysvision/eslint-config-envoys",
   "version": "1.2.0",
   "description": "Eslint config for EnvoysSwap",
   "main": "lib/index.js",
   "files": [
     "lib"
   ],
-  "repository": "https://github.com/pancakeswap/pancake-toolkit/tree/master/packages/eslint-config-pancake",
+  "repository": "https://github.com/envoys-lab/envoys-toolkit/tree/master/packages/eslint-config-envoys",
   "license": "MIT",
   "author": "RabbitDoge",
   "private": false,

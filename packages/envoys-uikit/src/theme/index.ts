@@ -16,7 +16,7 @@ export interface EnvoysTheme {
   card: CardTheme;
   nav: NavThemeType;
   modal: ModalTheme;
-  pancakeToggle: EnvoysToggleTheme;
+  envoysToggle: EnvoysToggleTheme;
   radio: RadioTheme;
   toggle: ToggleTheme;
   tooltip: TooltipTheme;

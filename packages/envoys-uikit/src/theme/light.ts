@@ -19,7 +19,7 @@ const lightTheme: DefaultTheme = {
   toggle: lightToggle,
   nav: lightNav,
   modal: lightModal,
-  pancakeToggle: lightEnvoysToggle,
+  envoysToggle: lightEnvoysToggle,
   radio: lightRadio,
   tooltip: lightTooltip,
 };

@@ -1,5 +1,5 @@
 {
-  "extends": "@envoysvision/eslint-config-pancake",
+  "extends": "@envoysvision/eslint-config-envoys",
   "rules": {
     "import/no-extraneous-dependencies": [
       "error",

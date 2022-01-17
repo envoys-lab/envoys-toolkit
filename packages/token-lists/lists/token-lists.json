@@ -1,14 +1,14 @@
 {
-  "https://tokens.pancakeswap.finance/pancakeswap-default.json": {
+  "https://tokens.pancakeswap.finance/envoys-default.json": {
     "name": "EnvoysSwap Default",
     "homepage": "https://pancakeswap.finance"
   },
-  "https://tokens.pancakeswap.finance/pancakeswap-extended.json": {
+  "https://tokens.pancakeswap.finance/envoys-extended.json": {
     "name": "EnvoysSwap Extended",
     "homepage": "https://pancakeswap.finance"
     
   },
-  "https://tokens.pancakeswap.finance/pancakeswap-top-100.json": {
+  "https://tokens.pancakeswap.finance/envoys-top-100.json": {
     "name": "EnvoysSwap Top 100",
     "homepage": "https://pancakeswap.finance"
     

@@ -11,7 +11,7 @@ export const footerLinks: FooterLinkType[] = [
       },
       {
         label: "Blog",
-        href: "https://pancakeswap.medium.com/",
+        href: "https://envoys.medium.com/",
       },
       {
         label: "Community",
@@ -26,7 +26,7 @@ export const footerLinks: FooterLinkType[] = [
       },
       {
         label: "Online Store",
-        href: "https://pancakeswap.creator-spring.com/",
+        href: "https://envoys.creator-spring.com/",
         isHighlighted: true,
       },
     ],
@@ -53,7 +53,7 @@ export const footerLinks: FooterLinkType[] = [
     items: [
       {
         label: "Github",
-        href: "https://github.com/pancakeswap",
+        href: "https://github.com/envoys-lab",
       },
       {
         label: "Documentation",
@@ -61,11 +61,11 @@ export const footerLinks: FooterLinkType[] = [
       },
       {
         label: "Bug Bounty",
-        href: "https://app.gitbook.com/@envoysvision-1/s/pancakeswap/code/bug-bounty",
+        href: "https://app.gitbook.com/@envoysvision-1/s/envoys/code/bug-bounty",
       },
       {
         label: "Audits",
-        href: "https://docs.pancakeswap.finance/help/faq#is-pancakeswap-safe-has-pancakeswap-been-audited",
+        href: "https://docs.pancakeswap.finance/help/faq#is-envoys-safe-has-envoys-been-audited",
       },
       {
         label: "Careers",
@@ -79,7 +79,7 @@ export const socials = [
   {
     label: "Twitter",
     icon: "Twitter",
-    href: "https://twitter.com/pancakeswap",
+    href: "https://twitter.com/envoys",
   },
   {
     label: "Telegram",
@@ -87,7 +87,7 @@ export const socials = [
     items: [
       {
         label: "English",
-        href: "https://t.me/pancakeswap",
+        href: "https://t.me/envoys",
       },
       {
         label: "Bahasa Indonesia",
@@ -103,15 +103,15 @@ export const socials = [
       },
       {
         label: "Italiano",
-        href: "https://t.me/pancakeswap_ita",
+        href: "https://t.me/envoys_ita",
       },
       {
         label: "русский",
-        href: "https://t.me/pancakeswap_ru",
+        href: "https://t.me/envoys_ru",
       },
       {
         label: "Türkiye",
-        href: "https://t.me/pancakeswapturkiye",
+        href: "https://t.me/envoysturkiye",
       },
       {
         label: "Português",
@@ -123,11 +123,11 @@ export const socials = [
       },
       {
         label: "日本語",
-        href: "https://t.me/pancakeswapjp",
+        href: "https://t.me/envoysjp",
       },
       {
         label: "Français",
-        href: "https://t.me/pancakeswapfr",
+        href: "https://t.me/envoysfr",
       },
       {
         label: "Datch",
@@ -150,22 +150,22 @@ export const socials = [
   {
     label: "Reddit",
     icon: "Reddit",
-    href: "https://reddit.com/r/pancakeswap",
+    href: "https://reddit.com/r/envoys",
   },
   {
     label: "Instagram",
     icon: "Instagram",
-    href: "https://instagram.com/pancakeswap_official",
+    href: "https://instagram.com/envoys_official",
   },
   {
     label: "Github",
     icon: "Github",
-    href: "https://github.com/pancakeswap/",
+    href: "https://github.com/envoys-lab/",
   },
   {
     label: "Discord",
     icon: "Discord",
-    href: "https://discord.gg/pancakeswap",
+    href: "https://discord.gg/envoys",
   },
 ];
 

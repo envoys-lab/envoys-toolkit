@@ -11,10 +11,10 @@ import currentEnvoysswapTop100tList from "../lists/envoys-top-100.json";
 import { buildList, VersionBump } from "../src/buildList";
 
 const currentLists = {
-  "pancakeswap-default": currentEnvoysswapDefaultList,
-  "pancakeswap-extended": currentEnvoysswapExtendedtList,
-  "pancakeswap-top-100": currentEnvoysswapTop100tList,
-  "pancakeswap-top-15": currentEnvoysswapTop15List,
+  "envoys-default": currentEnvoysswapDefaultList,
+  "envoys-extended": currentEnvoysswapExtendedtList,
+  "envoys-top-100": currentEnvoysswapTop100tList,
+  "envoys-top-15": currentEnvoysswapTop15List,
 };
 
 const ajv = new Ajv({ allErrors: true, format: "full" });
@@ -103,7 +103,7 @@ expect.extend({
   },
 });
 
-describe.each([["pancakeswap-default"], ["pancakeswap-extended"], ["pancakeswap-top-100"], ["pancakeswap-top-15"]])(
+describe.each([["envoys-default"], ["envoys-extended"], ["envoys-top-100"], ["envoys-top-15"]])(
   "buildList %s",
   (listName) => {
     const defaultTokenList = buildList(listName);

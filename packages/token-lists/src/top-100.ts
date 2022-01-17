@@ -147,7 +147,7 @@ const main = async (): Promise<void> => {
       return [...list, updatedToken];
     }, []);
 
-    const tokenListPath = `${path.resolve()}/src/tokens/pancakeswap-top-100.json`;
+    const tokenListPath = `${path.resolve()}/src/tokens/envoys-top-100.json`;
     console.info("Saving updated list to ", tokenListPath);
     const stringifiedList = JSON.stringify(sanitizedTokens, null, 2);
     fs.writeFileSync(tokenListPath, stringifiedList);
