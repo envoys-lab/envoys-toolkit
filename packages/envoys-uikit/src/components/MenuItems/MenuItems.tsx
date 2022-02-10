@@ -8,7 +8,7 @@ import { MenuItemsProps } from "./types";
 
 const MenuItems: React.FC<MenuItemsProps> = ({ items = [], activeItem, activeSubItem, ...props }) => {
   return (
-    <Flex {...props}>
+    <Flex flexDirection="column" {...props}>
       {items.map(({ label, items: menuItems = [], href, icon = "" }) => {
         const statusColor = menuItems?.find((menuItem) => menuItem.status !== undefined)?.status?.color;
         const isActive = activeItem === href;
