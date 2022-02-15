@@ -4,7 +4,6 @@ import Flex from "../Box/Flex";
 import { TabMenuProps } from "./types";
 
 const Wrapper = styled(Flex)`
-  border-bottom: 2px solid ${({ theme }) => theme.colors.input};
   overflow-x: scroll;
 
   ::-webkit-scrollbar {
@@ -14,31 +13,52 @@ const Wrapper = styled(Flex)`
   scrollbar-width: none; /* Firefox */
 `;
 
+const Divider = styled.div`
+  width: 1px;
+  height: 40px;
+  background: ${({ theme }) => theme.colors.tabDivider};
+`
+
 const Inner = styled(Flex)`
   justify-content: space-between;
   flex-grow: 1;
-
-  & > button + button {
-    margin-left: 4px;
-  }
 
   ${({ theme }) => theme.mediaQueries.md} {
     flex-grow: 0;
   }
 `;
 
+const BottomDivider = styled(Flex)`
+  height: 3px;
+  flex-direction: column;
+  border-radius: 2px;
+  background: ${({ theme }) => theme.colors.basicOrange};
+`
+
+const TabWrapper = styled.div`
+  margin: 0 50px 0 50px;
+`
+
 const ButtonMenu: React.FC<TabMenuProps> = ({ activeIndex = 0, onItemClick, children }) => {
   return (
-    <Wrapper p={["0 4px", "0 16px"]}>
+    <Wrapper >
       <Inner>
         {Children.map(children, (child: ReactElement, index) => {
           const isActive = activeIndex === index;
-          return cloneElement(child, {
-            isActive,
-            onClick: onItemClick ? () => onItemClick(index) : undefined,
-            color: isActive ? "backgroundAlt" : "textSubtle",
-            backgroundColor: isActive ? "textSubtle" : "input",
-          });
+          const isLast = index === children.length - 1;
+          return <Flex>
+              <TabWrapper>
+                  {cloneElement(child, {
+                      isLast,
+                      isActive,
+                      onClick: onItemClick ? () => onItemClick(index) : undefined,
+                      color: isActive ? "basicOrange" : "black",
+                      backgroundColor: "white",
+                  })}
+                  {isActive && <BottomDivider />}
+              </TabWrapper>
+              {!isLast && <Divider/>}
+          </Flex>
         })}
       </Inner>
     </Wrapper>

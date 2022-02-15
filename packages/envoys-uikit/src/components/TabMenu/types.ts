@@ -6,6 +6,7 @@ export interface TabMenuProps {
   children: React.ReactElement[];
 }
 export interface TabProps extends ColorProps {
+  isLast?: boolean;
   isActive?: boolean;
   onClick?: () => void;
   scale?: "md" | "lg";

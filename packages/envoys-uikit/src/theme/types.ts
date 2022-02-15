@@ -63,6 +63,8 @@ export type Colors = {
   textDisabled: string;
   textSubtle: string;
   disabled: string;
+  tabDivider: string;
+  basicOrange: string;
 
   // Gradients
   gradients: Gradients;
