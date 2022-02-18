@@ -1,4 +1,5 @@
 import { FlexProps } from "styled-system";
+import { SvgProps } from "../../../..";
 
 export const variants = {
   DEFAULT: "default",
@@ -13,6 +14,7 @@ export interface UserMenuProps extends FlexProps {
   account?: string;
   text?: string;
   avatarSrc?: string;
+  leftIcon?: React.FC<SvgProps>;
   variant?: Variant;
 }
 
