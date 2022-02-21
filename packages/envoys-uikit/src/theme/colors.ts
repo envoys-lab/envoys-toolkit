@@ -9,6 +9,7 @@ export const baseColors = {
   buttonTitle: "#133D65",
   success: "#31D0AA",
   warning: "#FFB237",
+  error: "f15555",
 };
 
 export const additionalColors = {
@@ -18,7 +19,7 @@ export const additionalColors = {
   silver: "#B2B2B2",
   bronze: "#E7974D",
   basicOrange: "#F48020",
-  tabDivider: "#E5E5E5"
+  tabDivider: "#E5E5E5",
 };
 
 export const lightColors: Colors = {
@@ -29,6 +30,7 @@ export const lightColors: Colors = {
   backgroundDisabled: "#E9EAEB",
   backgroundAlt: "#FFFFFF",
   backgroundAlt2: "rgba(255, 255, 255, 0.7)",
+  tipBackground: "rgba(54, 111, 221, 0.05)",
   cardBorder: "rgba(19, 61, 101, 0.05)",
   contrast: "#191326",
   dropdown: "#F6F6F6",
@@ -62,6 +64,7 @@ export const darkColors: Colors = {
   backgroundDisabled: "#3c3742",
   backgroundAlt: "#27262c",
   backgroundAlt2: "rgba(39, 38, 44, 0.7)",
+  tipBackground: "rgba(54, 111, 221, 0.05)",
   cardBorder: "#383241",
   contrast: "#FFFFFF",
   dropdown: "#1E1D20",

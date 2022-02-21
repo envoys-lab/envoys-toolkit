@@ -48,6 +48,7 @@ export type Colors = {
   tertiary: string;
   success: string;
   failure: string;
+  error: string;
   warning: string;
   cardBorder: string;
   contrast: string;
@@ -68,6 +69,7 @@ export type Colors = {
   tabDivider: string;
   basicOrange: string;
   disabledMenuItem: string;
+  tipBackground: string;
 
   // Gradients
   gradients: Gradients;
