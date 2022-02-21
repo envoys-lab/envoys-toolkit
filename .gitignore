@@ -9,7 +9,7 @@ coverage
 # production
 dist
 storybook-static
-
+.idea
 # misc
 .DS_Store
 
