@@ -14,3 +14,7 @@ export type StyledMenuItemProps = {
   $variant?: MenuItemVariant;
   $statusColor?: keyof Colors;
 };
+
+export type StyledIconContainerProps = {
+  isActive?: boolean;
+};

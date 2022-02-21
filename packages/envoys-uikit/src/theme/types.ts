@@ -41,6 +41,7 @@ export type Gradients = {
 
 export type Colors = {
   primary: string;
+  buttonTitle: string;
   primaryBright: string;
   primaryDark: string;
   secondary: string;
@@ -56,6 +57,7 @@ export type Colors = {
   input: string;
   inputSecondary: string;
   background: string;
+  backgroundPage: string;
   backgroundDisabled: string;
   backgroundAlt: string;
   backgroundAlt2: string;
@@ -65,6 +67,7 @@ export type Colors = {
   disabled: string;
   tabDivider: string;
   basicOrange: string;
+  disabledMenuItem: string;
 
   // Gradients
   gradients: Gradients;

@@ -71,7 +71,7 @@ const ConnectModal: React.FC<Props> = ({ login, onDismiss = () => null, displayC
                 <WalletCard walletConfig={wallet} login={login} onDismiss={onDismiss} />
               </Box>
             ))}
-            {!showMore && <MoreWalletCard t={t} onClick={() => setShowMore(true)} />}
+            {sortedConfig.length === 0 && !showMore && <MoreWalletCard t={t} onClick={() => setShowMore(true)} />}
           </Grid>
         </WalletWrapper>
         <Box p="24px">
@@ -80,7 +80,7 @@ const ConnectModal: React.FC<Props> = ({ login, onDismiss = () => null, displayC
           </Text>
           <Button
             as="a"
-            href="https://docs.pancakeswap.finance/get-started/connection-guide"
+            href="https://metamask.io/faqs/"
             variant="subtle"
             width="100%"
             {...getExternalLinkProps()}
