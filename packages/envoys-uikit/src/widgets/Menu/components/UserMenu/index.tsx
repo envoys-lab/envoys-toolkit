@@ -10,38 +10,42 @@ import { UserMenuItem } from "./styles";
 export const StyledUserMenu = styled(Flex)`
   align-items: center;
   background-color: ${({ theme }) => theme.colors.tertiary};
-  border-radius: 16px;
-  box-shadow: inset 0px -2px 0px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  display: inline-flex;
-  height: 32px;
-  padding-left: 40px;
-  padding-right: 8px;
-  position: relative;
+
+  justify-content: space-between;
+
+  padding-left: 19px;
+  padding-right: 11px;
+
+  height: 56px;
+  width: 100%;
+
+  border-radius: 14px;
 
   &:hover {
     opacity: 0.65;
   }
 `;
 
+export const IconContainer = styled.div`
+  width: 24px;
+`
+
 export const LabelText = styled.div`
   color: ${({ theme }) => theme.colors.text};
-  display: none;
-  font-weight: 600;
-
-  ${({ theme }) => theme.mediaQueries.sm} {
-    display: block;
-    margin-left: 8px;
-    margin-right: 4px;
-  }
+  font-weight: 500;
+  font-size: 16px;
 `;
 
 const Menu = styled.div<{ isOpen: boolean }>`
   background-color: ${({ theme }) => theme.card.background};
-  border: 1px solid ${({ theme }) => theme.colors.cardBorder};
-  border-radius: 16px;
-  padding-bottom: 4px;
-  padding-top: 4px;
+
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.06);
+  backdrop-filter: blur(40px);
+
+  border-radius: 14px;
+
+  padding: 17px 20px 17px 20px;
+
   pointer-events: auto;
   width: 280px;
   visibility: visible;
@@ -53,28 +57,23 @@ const Menu = styled.div<{ isOpen: boolean }>`
     pointer-events: none;
     visibility: hidden;
   `}
-
-  ${UserMenuItem}:first-child {
-    border-radius: 8px 8px 0 0;
-  }
-
-  ${UserMenuItem}:last-child {
-    border-radius: 0 0 8px 8px;
-  }
 `;
 
 const UserMenu: React.FC<UserMenuProps> = ({
   account,
   text,
   avatarSrc,
+  leftIcon,
   variant = variants.DEFAULT,
   children,
   ...props
 }) => {
+
+  const LeftSideIcon = leftIcon
   const [isOpen, setIsOpen] = useState(false);
   const [targetRef, setTargetRef] = useState<HTMLDivElement | null>(null);
   const [tooltipRef, setTooltipRef] = useState<HTMLDivElement | null>(null);
-  const accountEllipsis = account ? `${account.substring(0, 2)}...${account.substring(account.length - 4)}` : null;
+  const accountEllipsis = account ? `${account.substring(0, 8)}...${account.substring(account.length - 4)}` : null;
   const { styles, attributes } = usePopper(targetRef, tooltipRef, {
     strategy: "fixed",
     placement: "bottom-end",
@@ -110,9 +109,10 @@ const UserMenu: React.FC<UserMenuProps> = ({
           setIsOpen((s) => !s);
         }}
       >
-        <MenuIcon avatarSrc={avatarSrc} variant={variant} />
         <LabelText title={text || account}>{text || accountEllipsis}</LabelText>
-        <ChevronDownIcon color="text" width="24px" />
+        <IconContainer>
+          {LeftSideIcon ? <LeftSideIcon/> : ''} 
+        </IconContainer>
       </StyledUserMenu>
       <Menu style={styles.popper} ref={setTooltipRef} {...attributes.popper} isOpen={isOpen}>
         <Box onClick={() => setIsOpen(false)}>{children}</Box>

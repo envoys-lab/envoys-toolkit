@@ -1,6 +1,6 @@
 {
   "name": "@envoysvision/uikit",
-  "version": "0.63.1",
+  "version": "0.63.3",
   "description": "Set of UI components for envoys projects",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
@@ -15,7 +15,6 @@
     "build": "rm -rf ./dist && rollup -c && tsc -d --emitDeclarationOnly --declarationDir dist",
     "watch": "rollup -c -w",
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
-    "format:check": "prettier --check --loglevel error 'src/**/*.{js,jsx,ts,tsx}'",
     "format:write": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'",
     "storybook": "start-storybook -p 6006",
     "storybook:build": "build-storybook",
@@ -32,6 +31,7 @@
     "@testing-library/react": "^11.2.5",
     "@types/lodash": "^4.14.168",
     "@types/react-dom": "^17.0.5",
+    "eslint-config-prettier": "^8.3.0",
     "jest-styled-components": "^7.0.3",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",

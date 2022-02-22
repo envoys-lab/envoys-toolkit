@@ -1,191 +1,191 @@
-import throttle from "lodash/throttle";
 import React, { useEffect, useRef, useState } from "react";
-import styled from "styled-components";
-import BottomNav from "../../components/BottomNav";
+import styled, { useTheme } from "styled-components";
 import { Box } from "../../components/Box";
 import Flex from "../../components/Box/Flex";
-import Footer from "../../components/Footer";
 import MenuItems from "../../components/MenuItems/MenuItems";
-import { SubMenuItems } from "../../components/SubMenuItems";
 import { useMatchBreakpoints } from "../../hooks";
-import CakePrice from "../../components/CakePrice/CakePrice";
 import Logo from "./components/Logo";
-import { MENU_HEIGHT, MOBILE_MENU_HEIGHT, TOP_BANNER_HEIGHT, TOP_BANNER_HEIGHT_MOBILE } from "./config";
+import { MENU_HEIGHT, TOP_BANNER_HEIGHT, TOP_BANNER_HEIGHT_MOBILE } from "./config";
 import { NavProps } from "./types";
 import LangSelector from "../../components/LangSelector/LangSelector";
 import { MenuContext } from "./context";
+import { BurgerMenu } from "../../components/Svg";
+import IconButton from "../../components/Button/IconButton";
 
-const Wrapper = styled.div`
-  position: relative;
-  width: 100%;
+const PageTopBarContainer = styled.div`
+  padding: 30px 30px 0px 30px;
+`;
+// Just a thumbnail for temporary usage.
+const SearchBarThumbnail = styled.div`
+  max-width: 962px;
+  background: #ffffff;
+  border: 1px solid #e8e8ea;
+  box-sizing: border-box;
+  border-radius: 14px;
+  height: 60px;
 `;
 
-const StyledNav = styled.nav`
-  display: flex;
-  justify-content: space-between;
+const TopBarContainer = styled.div`
+  height: 60px;
+  background: rgba(255, 255, 255, 1);
+  backdrop-filter: blur(50px);
+  filter: drop-shadow(0px 4px 10px rgba(200, 200, 200, 0.1));
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+
   align-items: center;
-  width: 100%;
-  height: ${MENU_HEIGHT}px;
-  background-color: ${({ theme }) => theme.nav.background};
-  border-bottom: 1px solid ${({ theme }) => theme.colors.cardBorder};
-  transform: translate3d(0, 0, 0);
 
   padding-left: 16px;
   padding-right: 16px;
 `;
 
-const FixedContainer = styled.div<{ showMenu: boolean; height: number }>`
-  position: fixed;
-  top: ${({ showMenu, height }) => (showMenu ? 0 : `-${height}px`)};
-  left: 0;
-  transition: top 0.2s;
-  height: ${({ height }) => `${height}px`};
-  width: 100%;
-  z-index: 20;
+const MenusContainer = styled.div`
+  margin: 0 25px 10px 25px;
 `;
 
-const TopBannerContainer = styled.div<{ height: number }>`
-  height: ${({ height }) => `${height}px`};
-  min-height: ${({ height }) => `${height}px`};
-  max-height: ${({ height }) => `${height}px`};
-  width: 100%;
+const Wrapper = styled.div`
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+`;
+
+const StyledNav = styled.nav<{ isMobile: boolean }>`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  background-color: ${({ theme }) => theme.nav.background};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.cardBorder};
+  transform: translate3d(0, 0, 0);
+  padding-top: 50px;
+  height: ${({ isMobile }) => (isMobile ? "calc(100% - 60px)" : "100%")};
+`;
+
+const InnerContainer = styled.div`
+  width: 290px;
+`;
+
+const LogoSeparator = styled.nav`
+  height: 48px;
+`;
+
+const FixedContainer = styled.div<{ isFixed: boolean }>`
+  position: ${({ isFixed }) => (isFixed ? "fixed" : "relative")};
+  left: 0;
+  transition: top 0.2s;
+  z-index: 20;
+  height: 100%;
+  width: 24%;
+  max-width: 448px;
+  min-width: 290px;
 `;
 
 const BodyWrapper = styled(Box)`
-  position: relative;
-  display: flex;
+  display: block;
+  flex-grow: 1;
+`;
+
+const BottomMenuWrapper = styled(Flex)`
+  align-items: flex-end;
+  flex-direction: column;
+  padding-bottom: 30px;
+`;
+
+const LogoContainer = styled(Flex)`
+  padding: 0 16px 0 25px;
 `;
 
 const Inner = styled.div<{ isPushed: boolean; showMenu: boolean }>`
   flex-grow: 1;
   transition: margin-top 0.2s, margin-left 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   transform: translate3d(0, 0, 0);
-  max-width: 100%;
 `;
 
 const Menu: React.FC<NavProps> = ({
   linkComponent = "a",
-  userMenu,
-  banner,
   globalMenu,
   isDark,
   toggleTheme,
   currentLang,
   setLang,
-  cakePriceUsd,
   links,
-  subLinks,
-  footerLinks,
   activeItem,
   activeSubItem,
   langs,
-  buyCakeLabel,
   children,
 }) => {
-  const { isMobile } = useMatchBreakpoints();
-  const [showMenu, setShowMenu] = useState(true);
-  const refPrevOffset = useRef(typeof window === "undefined" ? 0 : window.pageYOffset);
+  const [showMenu, setShowMenu] = useState(false);
+  const onPressSideMenu = () => {
+    setShowMenu(!showMenu);
+  };
 
-  const topBannerHeight = isMobile ? TOP_BANNER_HEIGHT_MOBILE : TOP_BANNER_HEIGHT;
+  const theme = useTheme();
+  const { isTablet, isMobile } = useMatchBreakpoints();
 
-  const totalTopMenuHeight = banner ? MENU_HEIGHT + topBannerHeight : MENU_HEIGHT;
+  const lowResolutionMode = isTablet || isMobile;
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentOffset = window.pageYOffset;
-      const isBottomOfPage = window.document.body.clientHeight === currentOffset + window.innerHeight;
-      const isTopOfPage = currentOffset === 0;
-      // Always show the menu when user reach the top
-      if (isTopOfPage) {
-        setShowMenu(true);
-      }
-      // Avoid triggering anything at the bottom because of layout shift
-      else if (!isBottomOfPage) {
-        if (currentOffset < refPrevOffset.current || currentOffset <= totalTopMenuHeight) {
-          // Has scroll up
-          setShowMenu(true);
-        } else {
-          // Has scroll down
-          setShowMenu(false);
-        }
-      }
-      refPrevOffset.current = currentOffset;
-    };
-    const throttledHandleScroll = throttle(handleScroll, 200);
-
-    window.addEventListener("scroll", throttledHandleScroll);
-    return () => {
-      window.removeEventListener("scroll", throttledHandleScroll);
-    };
-  }, [totalTopMenuHeight]);
+  const topItems = links.filter((item) => item.bottom !== true);
+  const bottomItems = links.filter((item) => item.bottom === true);
 
   // Find the home link if provided
   const homeLink = links.find((link) => link.label === "Home");
 
-  const subLinksWithoutMobile = subLinks?.filter((subLink) => !subLink.isMobileOnly);
-  const subLinksMobileOnly = subLinks?.filter((subLink) => subLink.isMobileOnly);
-
   return (
     <MenuContext.Provider value={{ linkComponent }}>
-      <Wrapper>
-        <FixedContainer showMenu={showMenu} height={totalTopMenuHeight}>
-          {banner && <TopBannerContainer height={topBannerHeight}>{banner}</TopBannerContainer>}
-          <StyledNav>
-            <Flex>
-              <Logo isDark={isDark} href={homeLink?.href ?? "/"} />
-              {!isMobile && <MenuItems items={links} activeItem={activeItem} activeSubItem={activeSubItem} ml="24px" />}
-            </Flex>
-            <Flex alignItems="center" height="100%">
-              {!isMobile && (
-                <Box mr="12px">
-                  <CakePrice cakePriceUsd={cakePriceUsd} />
-                </Box>
-              )}
-              <Box mt="4px">
-                <LangSelector
-                  currentLang={currentLang}
-                  langs={langs}
-                  setLang={setLang}
-                  buttonScale="xs"
-                  color="textSubtle"
-                  hideLanguage
-                />
-              </Box>
-              {globalMenu} {userMenu}
-            </Flex>
-          </StyledNav>
-        </FixedContainer>
-        {subLinks && (
-          <Flex justifyContent="space-around">
-            <SubMenuItems items={subLinksWithoutMobile} mt={`${totalTopMenuHeight + 1}px`} activeItem={activeSubItem} />
+      {lowResolutionMode ? (
+        <TopBarContainer>
+          <div>
+            <IconButton onClick={onPressSideMenu} variant="text" scale="sm">
+              <BurgerMenu color={theme.colors.textSubtle} />
+            </IconButton>
+          </div>
+          <Logo isDark={isDark} href={homeLink?.href ?? "/"} />
+          <div />
+        </TopBarContainer>
+      ) : (
+        ""
+      )}
 
-            {subLinksMobileOnly?.length > 0 && (
-              <SubMenuItems
-                items={subLinksMobileOnly}
-                mt={`${totalTopMenuHeight + 1}px`}
-                activeItem={activeSubItem}
-                isMobileOnly
-              />
-            )}
-          </Flex>
+      <Wrapper>
+        {lowResolutionMode && !showMenu ? (
+          ""
+        ) : (
+          <FixedContainer isFixed>
+            <StyledNav isMobile={lowResolutionMode}>
+              <InnerContainer>
+                <Flex flexDirection="column">
+                  {lowResolutionMode ? (
+                    <></>
+                  ) : (
+                    <>
+                      <LogoContainer>
+                        <Logo isDark={isDark} href={homeLink?.href ?? "/"} />
+                      </LogoContainer>
+                      <LogoSeparator />
+                    </>
+                  )}
+                  <MenuItems items={topItems} activeItem={activeItem} activeSubItem={activeSubItem} />
+                </Flex>
+              </InnerContainer>
+              <BottomMenuWrapper>
+                <InnerContainer>
+                  <MenusContainer>{globalMenu}</MenusContainer>
+                  <MenuItems items={bottomItems} activeItem={activeItem} activeSubItem={activeSubItem} />
+                </InnerContainer>
+              </BottomMenuWrapper>
+            </StyledNav>
+          </FixedContainer>
         )}
-        <BodyWrapper mt={!subLinks ? `${totalTopMenuHeight + 1}px` : "0"}>
+        {!lowResolutionMode ? <FixedContainer isFixed={false} /> : ""}
+        <BodyWrapper>
+          <PageTopBarContainer>
+            <SearchBarThumbnail />
+          </PageTopBarContainer>
           <Inner isPushed={false} showMenu={showMenu}>
             {children}
-            <Footer
-              items={footerLinks}
-              isDark={isDark}
-              toggleTheme={toggleTheme}
-              langs={langs}
-              setLang={setLang}
-              currentLang={currentLang}
-              cakePriceUsd={cakePriceUsd}
-              buyCakeLabel={buyCakeLabel}
-              mb={[`${MOBILE_MENU_HEIGHT}px`, null, "0px"]}
-            />
           </Inner>
         </BodyWrapper>
-        {isMobile && <BottomNav items={links} activeItem={activeItem} activeSubItem={activeSubItem} />}
       </Wrapper>
     </MenuContext.Provider>
   );

@@ -13,6 +13,7 @@ export interface UserMenuProps extends FlexProps {
   account?: string;
   text?: string;
   avatarSrc?: string;
+  leftIcon?: React.FC;
   variant?: Variant;
 }
 

@@ -27,7 +27,7 @@ const StyledMenuItem = styled.a<StyledMenuItemProps>`
 
   color: ${({ theme, $isActive }) => ($isActive ? theme.colors.secondary : theme.colors.textSubtle)};
   font-size: 16px;
-  font-weight: ${({ $isActive }) => ($isActive ? "600" : "400")};
+  font-weight: ${({ $isActive }) => ($isActive ? "500" : "500")};
 
   ${({ $statusColor, theme }) =>
     $statusColor &&
@@ -45,18 +45,33 @@ const StyledMenuItem = styled.a<StyledMenuItemProps>`
   ${({ $variant }) =>
     $variant === "default"
       ? `
-    padding: 0 16px;
-    height: 48px;
+    padding: 0 16px 0 25px;
+    height: 56px;
   `
       : `
     padding: 4px 4px 0px 4px;
-    height: 42px;
+    height: 52px;
   `}
 
   &:hover {
     background: ${({ theme }) => theme.colors.tertiary};
-    ${({ $variant }) => $variant === "default" && "border-radius: 16px;"};
+    ${({ $variant }) => $variant === "default" && "border-radius: 0px;"};
   }
+`;
+
+export const StyledMenuItemSelection = styled.div<StyledMenuItemProps>`
+
+  ${({ $isActive, theme }) =>
+    $isActive && 
+    `
+      width: 4px;
+      height: 30px;
+      background-color: ${theme.colors.secondary};
+      border-radius: 2px;
+
+      position: fixed;
+      right: 0;
+    `};
 `;
 
 export default StyledMenuItem;
