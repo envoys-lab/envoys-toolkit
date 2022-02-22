@@ -11,10 +11,9 @@ const Tab = styled.button<TabProps>`
   flex-grow: 1;
   border: none;
   font-size: 16px;
-  font-weight: 600;
-  //width: 220px;
+  font-weight: 500;
   height: 40px;
-  
+
   ${({ theme }) => theme.mediaQueries.md} {
     flex-grow: 0;
   }

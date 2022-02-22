@@ -1,5 +1,5 @@
 import React, { cloneElement, Children, ReactElement } from "react";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 import Flex from "../Box/Flex";
 import { TabMenuProps } from "./types";
 
@@ -32,7 +32,10 @@ const BottomDivider = styled(Flex)`
 `;
 
 const TabWrapper = styled.div`
-  margin: 0 50px 0 50px;
+  margin: 0 25px;
+  ${({ theme }) => theme.mediaQueries.md} {
+    margin: 0 50px;
+  }
 `;
 
 const ButtonMenu: React.FC<TabMenuProps> = ({ activeIndex = 0, onItemClick, children }) => {
@@ -49,7 +52,7 @@ const ButtonMenu: React.FC<TabMenuProps> = ({ activeIndex = 0, onItemClick, chil
                   isLast,
                   isActive,
                   onClick: onItemClick ? () => onItemClick(index) : undefined,
-                  color: isActive ? "basicOrange" : "black",
+                  color: isActive ? "basicOrange" : "textSubtle",
                   backgroundColor: "white",
                 })}
                 {isActive && <BottomDivider />}
