@@ -9,21 +9,21 @@ import { MENU_HEIGHT, TOP_BANNER_HEIGHT, TOP_BANNER_HEIGHT_MOBILE } from "./conf
 import { NavProps } from "./types";
 import LangSelector from "../../components/LangSelector/LangSelector";
 import { MenuContext } from "./context";
-import { BurgerMenu, Button, IconButton } from "../..";
-
+import { BurgerMenu } from "../../components/Svg";
+import IconButton from "../../components/Button/IconButton";
 
 const PageTopBarContainer = styled.div`
-  padding 30px 30px 0px 30px;
-`
+  padding: 30px 30px 0px 30px;
+`;
 // Just a thumbnail for temporary usage.
 const SearchBarThumbnail = styled.div`
   max-width: 962px;
-  background: #FFFFFF;
-  border: 1px solid #E8E8EA;
+  background: #ffffff;
+  border: 1px solid #e8e8ea;
   box-sizing: border-box;
   border-radius: 14px;
   height: 60px;
-`
+`;
 
 const TopBarContainer = styled.div`
   height: 60px;
@@ -41,8 +41,8 @@ const TopBarContainer = styled.div`
 `;
 
 const MenusContainer = styled.div`
-    margin: 0 25px 10px 25px;
-`
+  margin: 0 25px 10px 25px;
+`;
 
 const Wrapper = styled.div`
   position: relative;
@@ -50,7 +50,7 @@ const Wrapper = styled.div`
   justify-content: flex-end;
 `;
 
-const StyledNav = styled.nav<{isMobile: boolean}>`
+const StyledNav = styled.nav<{ isMobile: boolean }>`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -59,7 +59,7 @@ const StyledNav = styled.nav<{isMobile: boolean}>`
   border-bottom: 1px solid ${({ theme }) => theme.colors.cardBorder};
   transform: translate3d(0, 0, 0);
   padding-top: 50px;
-  height: ${({ isMobile }) => isMobile ? 'calc(100% - 60px)' : '100%'};
+  height: ${({ isMobile }) => (isMobile ? "calc(100% - 60px)" : "100%")};
 `;
 
 const InnerContainer = styled.div`
@@ -70,7 +70,7 @@ const LogoSeparator = styled.nav`
   height: 48px;
 `;
 
-const FixedContainer = styled.div<{ isFixed: boolean;}>`
+const FixedContainer = styled.div<{ isFixed: boolean }>`
   position: ${({ isFixed }) => (isFixed ? "fixed" : "relative")};
   left: 0;
   transition: top 0.2s;
@@ -115,19 +115,18 @@ const Menu: React.FC<NavProps> = ({
   langs,
   children,
 }) => {
-
   const [showMenu, setShowMenu] = useState(false);
   const onPressSideMenu = () => {
-    setShowMenu(!showMenu)
-  }
+    setShowMenu(!showMenu);
+  };
 
-  const theme = useTheme()
+  const theme = useTheme();
   const { isTablet, isMobile } = useMatchBreakpoints();
 
-  const lowResolutionMode = isTablet || isMobile
+  const lowResolutionMode = isTablet || isMobile;
 
-  const topItems = links.filter(item => item.bottom !== true)
-  const bottomItems = links.filter(item => item.bottom === true)
+  const topItems = links.filter((item) => item.bottom !== true);
+  const bottomItems = links.filter((item) => item.bottom === true);
 
   // Find the home link if provided
   const homeLink = links.find((link) => link.label === "Home");
@@ -135,51 +134,53 @@ const Menu: React.FC<NavProps> = ({
   return (
     <MenuContext.Provider value={{ linkComponent }}>
       {lowResolutionMode ? (
-          <TopBarContainer>
-            <div>
-              <IconButton onClick={onPressSideMenu} variant="text" scale="sm">
-                <BurgerMenu color={theme.colors.textSubtle} />
-              </IconButton>
-            </div>
-            <Logo isDark={isDark} href={homeLink?.href ?? "/"} />
-            <div />
-          </TopBarContainer>
-      ) : ('')}
+        <TopBarContainer>
+          <div>
+            <IconButton onClick={onPressSideMenu} variant="text" scale="sm">
+              <BurgerMenu color={theme.colors.textSubtle} />
+            </IconButton>
+          </div>
+          <Logo isDark={isDark} href={homeLink?.href ?? "/"} />
+          <div />
+        </TopBarContainer>
+      ) : (
+        ""
+      )}
 
       <Wrapper>
-        {(lowResolutionMode && !showMenu) ? (
-          ('')
+        {lowResolutionMode && !showMenu ? (
+          ""
         ) : (
-        <FixedContainer isFixed>
-          <StyledNav isMobile={lowResolutionMode}>
-            <InnerContainer>
-              <Flex flexDirection="column">
-                {lowResolutionMode ? <></> : (
-                  <>
-                    <LogoContainer>
-                      <Logo isDark={isDark} href={homeLink?.href ?? "/"} />
-                    </LogoContainer>
-                    <LogoSeparator />
-                  </> 
-                )}
-                <MenuItems items={topItems} activeItem={activeItem} activeSubItem={activeSubItem}/>
-              </Flex>
-            </InnerContainer>
-            <BottomMenuWrapper >
+          <FixedContainer isFixed>
+            <StyledNav isMobile={lowResolutionMode}>
               <InnerContainer>
-                <MenusContainer>
-                {globalMenu}
-                </MenusContainer>
-                <MenuItems items={bottomItems} activeItem={activeItem} activeSubItem={activeSubItem}/>
+                <Flex flexDirection="column">
+                  {lowResolutionMode ? (
+                    <></>
+                  ) : (
+                    <>
+                      <LogoContainer>
+                        <Logo isDark={isDark} href={homeLink?.href ?? "/"} />
+                      </LogoContainer>
+                      <LogoSeparator />
+                    </>
+                  )}
+                  <MenuItems items={topItems} activeItem={activeItem} activeSubItem={activeSubItem} />
+                </Flex>
               </InnerContainer>
-            </BottomMenuWrapper>
-          </StyledNav>
-        </FixedContainer>
-      )}
-      { !lowResolutionMode ? <FixedContainer isFixed={false}/> : ('') }
+              <BottomMenuWrapper>
+                <InnerContainer>
+                  <MenusContainer>{globalMenu}</MenusContainer>
+                  <MenuItems items={bottomItems} activeItem={activeItem} activeSubItem={activeSubItem} />
+                </InnerContainer>
+              </BottomMenuWrapper>
+            </StyledNav>
+          </FixedContainer>
+        )}
+        {!lowResolutionMode ? <FixedContainer isFixed={false} /> : ""}
         <BodyWrapper>
           <PageTopBarContainer>
-            <SearchBarThumbnail/>
+            <SearchBarThumbnail />
           </PageTopBarContainer>
           <Inner isPushed={false} showMenu={showMenu}>
             {children}
