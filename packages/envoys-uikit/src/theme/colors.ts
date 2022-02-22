@@ -9,7 +9,7 @@ export const baseColors = {
   buttonTitle: "#133D65",
   success: "#31D0AA",
   warning: "#FFB237",
-  error: "f15555",
+  error: "#f15555",
 };
 
 export const additionalColors = {
@@ -25,6 +25,7 @@ export const additionalColors = {
 export const lightColors: Colors = {
   ...baseColors,
   ...additionalColors,
+  panelBorder: "#F8F8FA",
   background: "#F9F9F9",
   backgroundPage: "#F9F9F9",
   backgroundDisabled: "#E9EAEB",
@@ -58,6 +59,7 @@ export const lightColors: Colors = {
 export const darkColors: Colors = {
   ...baseColors,
   ...additionalColors,
+  panelBorder: "#F8F8FA",
   secondary: "#9A6AFF",
   background: "#08060B",
   backgroundPage: "#F9F9F9",

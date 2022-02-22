@@ -40,6 +40,7 @@ export type Gradients = {
 };
 
 export type Colors = {
+  panelBorder: string;
   primary: string;
   buttonTitle: string;
   primaryBright: string;

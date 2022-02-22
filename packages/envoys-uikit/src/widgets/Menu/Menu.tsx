@@ -18,14 +18,19 @@ const PageTopBarContainer = styled.div`
 // Just a thumbnail for temporary usage.
 const SearchBarThumbnail = styled.div`
   max-width: 962px;
-  background: #ffffff;
-  border: 1px solid #e8e8ea;
+  background: ${({ theme }) => theme.colors.backgroundAlt};
+  border: 1px solid ${({ theme }) => theme.colors.panelBorder};
   box-sizing: border-box;
   border-radius: 14px;
   height: 60px;
 `;
 
 const TopBarContainer = styled.div`
+  position: fixed;
+  z-index: 1002;
+
+  width: 100%;
+
   height: 60px;
   background: rgba(255, 255, 255, 1);
   backdrop-filter: blur(50px);
@@ -70,12 +75,20 @@ const LogoSeparator = styled.nav`
   height: 48px;
 `;
 
+const Space = styled.nav`
+  height: 60px;
+`;
+
 const FixedContainer = styled.div<{ isFixed: boolean }>`
+  ${({ isFixed, theme }) => isFixed && (`border-right: 1px solid ${theme.colors.panelBorder}`)};
+
   position: ${({ isFixed }) => (isFixed ? "fixed" : "relative")};
-  left: 0;
-  transition: top 0.2s;
-  z-index: 20;
   height: 100%;
+
+  left: 0;
+  transition: left 0.2s;
+  z-index: 20;
+
   width: 24%;
   max-width: 448px;
   min-width: 290px;
@@ -116,6 +129,7 @@ const Menu: React.FC<NavProps> = ({
   children,
 }) => {
   const [showMenu, setShowMenu] = useState(false);
+
   const onPressSideMenu = () => {
     setShowMenu(!showMenu);
   };
@@ -131,18 +145,25 @@ const Menu: React.FC<NavProps> = ({
   // Find the home link if provided
   const homeLink = links.find((link) => link.label === "Home");
 
+  const onItemClick = () => {
+    onPressSideMenu();
+  };
+
   return (
     <MenuContext.Provider value={{ linkComponent }}>
       {lowResolutionMode ? (
-        <TopBarContainer>
-          <div>
-            <IconButton onClick={onPressSideMenu} variant="text" scale="sm">
-              <BurgerMenu color={theme.colors.textSubtle} />
-            </IconButton>
-          </div>
-          <Logo isDark={isDark} href={homeLink?.href ?? "/"} />
-          <div />
-        </TopBarContainer>
+        <>
+          <TopBarContainer>
+            <div>
+              <IconButton onClick={onPressSideMenu} variant="text" scale="sm">
+                <BurgerMenu color={theme.colors.textSubtle} />
+              </IconButton>
+            </div>
+            <Logo isDark={isDark} href={homeLink?.href ?? "/"} />
+            <div />
+          </TopBarContainer>
+          <Space />
+        </>
       ) : (
         ""
       )}
@@ -165,13 +186,23 @@ const Menu: React.FC<NavProps> = ({
                       <LogoSeparator />
                     </>
                   )}
-                  <MenuItems items={topItems} activeItem={activeItem} activeSubItem={activeSubItem} />
+                  <MenuItems
+                    onItemClick={onItemClick}
+                    items={topItems}
+                    activeItem={activeItem}
+                    activeSubItem={activeSubItem}
+                  />
                 </Flex>
               </InnerContainer>
               <BottomMenuWrapper>
                 <InnerContainer>
                   <MenusContainer>{globalMenu}</MenusContainer>
-                  <MenuItems items={bottomItems} activeItem={activeItem} activeSubItem={activeSubItem} />
+                  <MenuItems
+                    onItemClick={onItemClick}
+                    items={bottomItems}
+                    activeItem={activeItem}
+                    activeSubItem={activeSubItem}
+                  />
                 </InnerContainer>
               </BottomMenuWrapper>
             </StyledNav>
