@@ -28,12 +28,13 @@ export const StyledUserMenu = styled(Flex)`
 
 export const IconContainer = styled.div`
   width: 24px;
-`
+`;
 
 export const LabelText = styled.div`
   color: ${({ theme }) => theme.colors.text};
   font-weight: 500;
   font-size: 16px;
+  user-select: none;
 `;
 
 const Menu = styled.div<{ isOpen: boolean }>`
@@ -68,8 +69,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
   children,
   ...props
 }) => {
-
-  const LeftSideIcon = leftIcon
+  const LeftSideIcon = leftIcon;
   const [isOpen, setIsOpen] = useState(false);
   const [targetRef, setTargetRef] = useState<HTMLDivElement | null>(null);
   const [tooltipRef, setTooltipRef] = useState<HTMLDivElement | null>(null);
@@ -110,9 +110,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
         }}
       >
         <LabelText title={text || account}>{text || accountEllipsis}</LabelText>
-        <IconContainer>
-          {LeftSideIcon ? <LeftSideIcon/> : ''} 
-        </IconContainer>
+        <IconContainer>{LeftSideIcon ? <LeftSideIcon /> : ""}</IconContainer>
       </StyledUserMenu>
       <Menu style={styles.popper} ref={setTooltipRef} {...attributes.popper} isOpen={isOpen}>
         <Box onClick={() => setIsOpen(false)}>{children}</Box>

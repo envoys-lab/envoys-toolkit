@@ -9,11 +9,13 @@ import { MenuItemsProps, StyledDisabledMenuItemProps } from "./types";
 import { StyledIconContainerProps } from "../MenuItem/types";
 
 const IconContainer = styled.div<StyledIconContainerProps>`
-  padding-right: ${({ isActive }) => (isActive ? "9px" : "22px")}; 
+  padding-right: ${({ isActive }) => (isActive ? "9px" : "22px")};
 `;
 
+const ClickContainer = styled.div``;
+
 const DisabledMenuItem = styled.div<StyledDisabledMenuItemProps>`
-  color: ${({ $targetColor }) => ($targetColor)};
+  color: ${({ $targetColor }) => $targetColor};
   user-select: none;
   display: flex;
   align-items: center;
@@ -22,36 +24,30 @@ const DisabledMenuItem = styled.div<StyledDisabledMenuItemProps>`
   padding: 0 16px 0 25px;
 `;
 
-const MenuItems: React.FC<MenuItemsProps> = ({ items = [], activeItem, activeSubItem, ...props }) => {
-
-  const theme = useTheme()
+const MenuItems: React.FC<MenuItemsProps> = ({ items = [], activeItem, activeSubItem, onItemClick, ...props }) => {
+  const theme = useTheme();
 
   return (
     <Flex flexDirection="column" {...props}>
       {items.map(({ label, items: menuItems = [], href, active, iconComponent }) => {
-        const Icon = iconComponent
+        const Icon = iconComponent;
         const statusColor = menuItems?.find((menuItem) => menuItem.status !== undefined)?.status?.color;
         const isActive = activeItem === href;
         const linkProps = isTouchDevice() && menuItems && menuItems.length > 0 ? {} : { href };
-        return (
-          active === false ?
-          (
+        return active === false ? (
           <DisabledMenuItem key={`${label}#${href}`} $targetColor={theme.colors.disabledMenuItem}>
-            <IconContainer isActive={false}>
-              {Icon ? <Icon color={theme.colors.disabledMenuItem}/> : ''} 
-            </IconContainer>
-            { label }
+            <IconContainer isActive={false}>{Icon ? <Icon color={theme.colors.disabledMenuItem} /> : ""}</IconContainer>
+            {label}
           </DisabledMenuItem>
-          ) : (
-          <MenuItem key={`${label}#${href}`} {...linkProps} isActive={isActive} statusColor={statusColor}>
-            <IconContainer isActive={isActive}>
-              {Icon ? <Icon color={isActive ? theme.colors.secondary : theme.colors.textSubtle}/> : ''} 
-            </IconContainer>
-            { label }
-          </MenuItem>
-          )
-
-
+        ) : (
+          <ClickContainer onClick={onItemClick} key={`${label}#${href}`}>
+            <MenuItem {...linkProps} isActive={isActive} statusColor={statusColor}>
+              <IconContainer isActive={isActive}>
+                {Icon ? <Icon color={isActive ? theme.colors.secondary : theme.colors.textSubtle} /> : ""}
+              </IconContainer>
+              {label}
+            </MenuItem>
+          </ClickContainer>
         );
       })}
     </Flex>
