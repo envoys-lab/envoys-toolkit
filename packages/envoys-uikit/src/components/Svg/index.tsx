@@ -8,6 +8,7 @@ export { default as ArrowDropUpIcon } from "./Icons/ArrowDropUp";
 export { default as ArrowFirstIcon } from "./Icons/ArrowFirst";
 export { default as ArrowForwardIcon } from "./Icons/ArrowForward";
 export { default as ArrowLastIcon } from "./Icons/ArrowLast";
+export { default as ArrowSwitch } from "./Icons/ArrowSwitch";
 export { default as ArrowUpIcon } from "./Icons/ArrowUp";
 export { default as ArrowUpDownIcon } from "./Icons/ArrowUpDown";
 export { default as AutoRenewIcon } from "./Icons/AutoRenew";
