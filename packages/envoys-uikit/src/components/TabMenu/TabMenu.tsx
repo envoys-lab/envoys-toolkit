@@ -54,16 +54,16 @@ const BottomDivider = styled(Flex)`
 `;
 
 
-const ButtonMenu: React.FC<TabMenuProps> = ({ fixedItems = 0, activeIndex = 0, onItemClick, children }) => {
+const ButtonMenu: React.FC<TabMenuProps> = ({ fixedForItems = 0, activeIndex = 0, onItemClick, children }) => {
   return (
-    <Wrapper className={fixedItems ? 'fix-items': ''}>
-      <Inner className={fixedItems ? 'fix-items': ''}>
+    <Wrapper className={fixedForItems ? 'fix-items': ''}>
+      <Inner className={fixedForItems ? 'fix-items': ''}>
         {Children.map(children, (child: ReactElement, index) => {
           const isActive = activeIndex === index;
           const isLast = index === children.length - 1;
           return (
-            <Flex style={fixedItems ? {width: `calc(100% / ${fixedItems})`}: {}}>
-              <TabWrapper className={fixedItems ? 'fix-items': ''}>
+            <Flex style={fixedForItems ? {width: `calc(100% / ${fixedForItems})`}: {}}>
+              <TabWrapper className={fixedForItems ? 'fix-items': ''}>
                 {cloneElement(child, {
                   isLast,
                   isActive,
