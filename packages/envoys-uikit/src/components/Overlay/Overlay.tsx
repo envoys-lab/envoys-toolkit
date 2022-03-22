@@ -4,11 +4,12 @@ import { Box, BoxProps } from "../Box";
 
 const StyledOverlay = styled(Box)`
   position: fixed;
-  top: 0px;
-  left: 0px;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  background-color: ${({ theme }) => `${theme.colors.text}99`};
+  background: rgba(247, 247, 247, 0.57);
+  backdrop-filter: blur(20px);
   z-index: 20;
 `;
 

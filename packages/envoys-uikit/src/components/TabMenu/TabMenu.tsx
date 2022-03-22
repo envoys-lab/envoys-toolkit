@@ -33,6 +33,7 @@ const Wrapper = styled(Flex)`
   scrollbar-width: none; /* Firefox */
   
   &.fix-items {
+    color: ${({ theme }) => theme.colors.darkClear};
     width: 100%;
     > div {
       width: 100%;
