@@ -1,7 +1,7 @@
 import { scales, variants } from "./types";
 
 export const scaleVariants = {
-  [scales.LD]: {
+  [scales.LG]: {
     height: "70px",
     padding: "0 24px",
   },
