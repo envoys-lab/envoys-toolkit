@@ -3,6 +3,26 @@ import styled, { useTheme } from "styled-components";
 import Flex from "../Box/Flex";
 import { TabMenuProps } from "./types";
 
+const Inner = styled(Flex)`
+  justify-content: space-between;
+  flex-grow: 0;
+  &.fix-items {
+    flex-grow: 1;
+    justify-content: stretch;
+  }
+`;
+
+const TabWrapper = styled.div`
+  margin: 0 25px;
+  ${({ theme }) => theme.mediaQueries.md} {
+    margin: 0 30px;
+  }
+  &.fix-items {
+    margin: 0 auto;
+  }
+`;
+
+
 const Wrapper = styled(Flex)`
   overflow-x: scroll;
 
@@ -11,17 +31,20 @@ const Wrapper = styled(Flex)`
   }
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+  
+  &.fix-items {
+    color: ${({ theme }) => theme.colors.darkClear};
+    width: 100%;
+    > div {
+      width: 100%;
+    }
+  }
 `;
 
 const Divider = styled.div`
   width: 1px;
   height: 40px;
   background: ${({ theme }) => theme.colors.tabDivider};
-`;
-
-const Inner = styled(Flex)`
-  justify-content: space-between;
-  flex-grow: 0;
 `;
 
 const BottomDivider = styled(Flex)`
@@ -31,23 +54,17 @@ const BottomDivider = styled(Flex)`
   background: ${({ theme }) => theme.colors.basicOrange};
 `;
 
-const TabWrapper = styled.div`
-  margin: 0 25px;
-  ${({ theme }) => theme.mediaQueries.md} {
-    margin: 0 50px;
-  }
-`;
 
-const ButtonMenu: React.FC<TabMenuProps> = ({ activeIndex = 0, onItemClick, children }) => {
+const ButtonMenu: React.FC<TabMenuProps> = ({ fixedForItems = 0, activeIndex = 0, onItemClick, children }) => {
   return (
-    <Wrapper>
-      <Inner>
+    <Wrapper className={fixedForItems ? 'fix-items': ''}>
+      <Inner className={fixedForItems ? 'fix-items': ''}>
         {Children.map(children, (child: ReactElement, index) => {
           const isActive = activeIndex === index;
           const isLast = index === children.length - 1;
           return (
-            <Flex>
-              <TabWrapper>
+            <Flex style={fixedForItems ? {width: `calc(100% / ${fixedForItems})`}: {}}>
+              <TabWrapper className={fixedForItems ? 'fix-items': ''}>
                 {cloneElement(child, {
                   isLast,
                   isActive,

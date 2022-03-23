@@ -7,7 +7,7 @@ export const baseColors = {
   primaryDark: "#0098A1",
   secondary: "#F48020",
   buttonTitle: "#133D65",
-  success: "#31D0AA",
+  success: "#44AE9B",
   warning: "#FFB237",
   error: "#f15555",
 };
@@ -20,6 +20,8 @@ export const additionalColors = {
   bronze: "#E7974D",
   basicOrange: "#F48020",
   tabDivider: "#E5E5E5",
+  darkClear: "#0F2B46",
+  mainDark: "#133D65"
 };
 
 export const lightColors: Colors = {
@@ -28,6 +30,7 @@ export const lightColors: Colors = {
   panelBorder: "#F8F8FA",
   background: "#F9F9F9",
   backgroundPage: "#F9F9F9",
+  //backgroundPage: "#ddd",
   backgroundDisabled: "#E9EAEB",
   backgroundAlt: "#FFFFFF",
   backgroundAlt2: "rgba(255, 255, 255, 0.7)",
