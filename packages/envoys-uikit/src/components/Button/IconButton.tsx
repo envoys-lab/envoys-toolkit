@@ -5,6 +5,7 @@ import {BaseButtonProps} from "./types";
 
 const IconButton: PolymorphicComponent<BaseButtonProps, "button"> = styled(Button)<BaseButtonProps>`
   padding: 0;
+  border-radius: ${({ theme, circle }) => circle ? theme.radii.circle : theme.radii.icon};
   ${({scale}) => {
     let size;
     switch (scale) {
