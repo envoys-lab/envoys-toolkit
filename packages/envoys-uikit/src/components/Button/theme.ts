@@ -36,9 +36,15 @@ export const styleVariants = {
     },
   },
   [variants.TERTIARY]: {
-    backgroundColor: "tertiary",
+    border: "2px solid",
+    borderColor: "primary",
+    backgroundColor: "transparent",
     boxShadow: "none",
     color: "primary",
+    ":disabled": {
+      borderColor: "backgroundPage",
+    },
+    marginBottom: 1,
   },
   [variants.SUBTLE]: {
     backgroundColor: "textSubtle",
