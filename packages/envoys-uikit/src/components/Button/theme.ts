@@ -27,18 +27,24 @@ export const styleVariants = {
   },
   [variants.SECONDARY]: {
     backgroundColor: "transparent",
-    border: "2px solid",
-    borderColor: "primary",
-    boxShadow: "none",
-    color: "primary",
+    border: "1px solid",
+    borderColor: "backgroundPage",
+    boxShadow: "level0",
+    color: "mainDark",
     ":disabled": {
       backgroundColor: "transparent",
     },
   },
   [variants.TERTIARY]: {
-    backgroundColor: "tertiary",
+    border: "2px solid",
+    borderColor: "primary",
+    backgroundColor: "transparent",
     boxShadow: "none",
     color: "primary",
+    ":disabled": {
+      borderColor: "backgroundPage",
+    },
+    marginBottom: 1,
   },
   [variants.SUBTLE]: {
     backgroundColor: "textSubtle",

@@ -17,6 +17,7 @@ export type Radii = {
   default: string;
   card: string;
   circle: string;
+  icon: string;
 };
 
 export type Shadows = {
