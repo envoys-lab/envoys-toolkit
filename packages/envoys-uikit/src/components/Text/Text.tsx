@@ -30,12 +30,14 @@ const Text = styled.div<TextProps>`
   ${space}
   ${typography}
   ${layout}
+  ${({ thin }) => thin && `opacity: 0.7;`}
 `;
 
 Text.defaultProps = {
   color: "text",
   small: false,
   ellipsis: false,
+  thin: false
 };
 
 export default Text;
