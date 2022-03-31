@@ -44,6 +44,9 @@ const BaseMenu: React.FC<BaseMenuProps> = ({ component, options, children, isOpe
           !targetElement.contains(target)
         ) {
           setIsMenuOpen(false);
+          if (onClose && typeof onClose === 'function') {
+            onClose();
+          }
         }
       }
     };
@@ -53,7 +56,7 @@ const BaseMenu: React.FC<BaseMenuProps> = ({ component, options, children, isOpe
     return () => {
       document.removeEventListener("click", handleClickOutside);
     };
-  }, [menuElement, targetElement]);
+  }, [menuElement, targetElement, onClose]);
 
   const { styles, attributes } = usePopper(targetElement, menuElement, {
     placement,
