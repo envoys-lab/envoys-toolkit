@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from "react";
+import React, {useState, useEffect} from "react";
 import { createPortal } from "react-dom";
 import { usePopper } from "react-popper";
 import { ClickableElementContainer } from "./styles";
@@ -11,7 +11,6 @@ const BaseMenu: React.FC<BaseMenuProps> = ({ component, options, children, isOpe
   const placement = options?.placement ?? "bottom";
   const offset = options?.offset ?? [0, 10];
   const padding = options?.padding ?? { left: 16, right: 16 };
-  const didMount = useRef(false);
 
   const [isMenuOpen, setIsMenuOpen] = useState(isOpen);
 
@@ -24,27 +23,16 @@ const BaseMenu: React.FC<BaseMenuProps> = ({ component, options, children, isOpe
   };
 
   const close = () => {
-    setIsMenuOpen(false, );
+    setIsMenuOpen(false);
+    if (onClose && typeof onClose === 'function') {
+      onClose();
+    }
   };
 
   // Allow for component to be controlled
   useEffect(() => {
     setIsMenuOpen(isOpen);
   }, [isOpen, setIsMenuOpen]);
-
-  useEffect(() => {
-    // Return early, if this is the first render:
-    if ( !didMount.current ) {
-      didMount.current = true;
-      return;
-    }
-    // Paste code to be executed on subsequent renders:
-    if (onClose && typeof onClose === 'function') {
-      if (isMenuOpen) {
-        onClose();
-      }
-    }
-  }, [isMenuOpen, onClose]);
 
   useEffect(() => {
     const handleClickOutside = ({ target }: Event) => {
@@ -55,7 +43,7 @@ const BaseMenu: React.FC<BaseMenuProps> = ({ component, options, children, isOpe
           !menuElement.contains(target) &&
           !targetElement.contains(target)
         ) {
-          close();
+          setIsMenuOpen(false);
         }
       }
     };
