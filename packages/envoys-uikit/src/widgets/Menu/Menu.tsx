@@ -1,29 +1,16 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import styled, { useTheme } from "styled-components";
 import { Box } from "../../components/Box";
 import Flex from "../../components/Box/Flex";
 import MenuItems from "../../components/MenuItems/MenuItems";
 import { useMatchBreakpoints } from "../../hooks";
 import Logo from "./components/Logo";
-import { MENU_HEIGHT, TOP_BANNER_HEIGHT, TOP_BANNER_HEIGHT_MOBILE } from "./config";
+// import { MENU_HEIGHT, TOP_BANNER_HEIGHT, TOP_BANNER_HEIGHT_MOBILE } from "./config";
 import { NavProps } from "./types";
-import LangSelector from "../../components/LangSelector/LangSelector";
+// import LangSelector from "../../components/LangSelector/LangSelector";
 import { MenuContext } from "./context";
 import { BurgerMenu } from "../../components/Svg";
 import IconButton from "../../components/Button/IconButton";
-
-const PageTopBarContainer = styled.div`
-  padding: 30px 30px 0px 30px;
-`;
-// Just a thumbnail for temporary usage.
-const SearchBarThumbnail = styled.div`
-  max-width: 962px;
-  background: ${({ theme }) => theme.colors.backgroundAlt};
-  border: 1px solid ${({ theme }) => theme.colors.panelBorder};
-  box-sizing: border-box;
-  border-radius: 14px;
-  height: 60px;
-`;
 
 const TopBarContainer = styled.div`
   position: fixed;
@@ -94,7 +81,7 @@ const FixedContainer = styled.div<{ isFixed: boolean }>`
   min-width: 290px;
 `;
 
-const BodyWrapper = styled(Box)`
+const Body = styled(Box)`
   display: block;
   flex-grow: 1;
 `;
@@ -116,16 +103,13 @@ const Inner = styled.div<{ isPushed: boolean; showMenu: boolean }>`
 `;
 
 const Menu: React.FC<NavProps> = ({
+  searchBar,
   linkComponent = "a",
   globalMenu,
   isDark,
-  toggleTheme,
-  currentLang,
-  setLang,
   links,
   activeItem,
   activeSubItem,
-  langs,
   children,
 }) => {
   const [showMenu, setShowMenu] = useState(false);
@@ -209,14 +193,12 @@ const Menu: React.FC<NavProps> = ({
           </FixedContainer>
         )}
         {!lowResolutionMode ? <FixedContainer isFixed={false} /> : ""}
-        <BodyWrapper>
-          <PageTopBarContainer>
-            <SearchBarThumbnail />
-          </PageTopBarContainer>
+        <Body>
+          {searchBar}
           <Inner isPushed={false} showMenu={showMenu}>
             {children}
           </Inner>
-        </BodyWrapper>
+        </Body>
       </Wrapper>
     </MenuContext.Provider>
   );
