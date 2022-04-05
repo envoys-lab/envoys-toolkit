@@ -21,6 +21,11 @@ const WalletWrapper = styled(Box)`
   border-bottom: 1px solid ${({ theme }) => theme.colors.cardBorder};
 `;
 
+const WalletCardBox = styled(Box)`
+  background: ${({ theme }) => theme.colors.background};
+  border-radius: ${({ theme }) => theme.radii.default};
+`;
+
 /**
  * Checks local storage if we have saved the last wallet the user connected with
  * If we find something we put it at the top of the list
@@ -61,28 +66,26 @@ const ConnectModal: React.FC<Props> = ({ login, onDismiss = () => null, displayC
         <ModalCloseButton onDismiss={onDismiss} />
       </ModalHeader>
       <ModalBody width={["320px", null, "340px"]}>
-        <WalletWrapper px="24px" py="12px" maxHeight="453px" overflowY="auto">
-          <Grid gridTemplateColumns="1fr 1fr">
+        <WalletWrapper m="24px" mb="0" pb="24px" maxHeight="453px" overflowY="auto">
+          <Grid gridTemplateColumns="1fr 1fr" gridGap="24px">
             {displayListConfig.map((wallet) => (
-              <Box key={wallet.title}>
+              <WalletCardBox key={wallet.title}>
                 <WalletCard walletConfig={wallet} login={login} onDismiss={onDismiss} />
-              </Box>
+              </WalletCardBox>
             ))}
             {sortedConfig.length === 0 && !showMore && <MoreWalletCard t={t} onClick={() => setShowMore(true)} />}
           </Grid>
         </WalletWrapper>
-        <Box px="24px" py="12px">
-          <Button
-            as="a"
-            href="https://metamask.io/faqs/"
-            variant="tertiary"
-            width="100%"
-            style={{ borderColor: "transparent"}}
-            {...getExternalLinkProps()}
-          >
-            {t("How to Connect")}
-          </Button>
-        </Box>
+        <Button
+          as="a"
+          href="https://metamask.io/faqs/"
+          variant="tertiary"
+          width="100%"
+          style={{ borderColor: "transparent"}}
+          {...getExternalLinkProps()}
+        >
+          {t("How to Connect")}
+        </Button>
       </ModalBody>
     </ModalContainer>
   );
