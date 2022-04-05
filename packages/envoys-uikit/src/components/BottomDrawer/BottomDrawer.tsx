@@ -14,8 +14,8 @@ interface BottomDrawerProps {
   content: React.ReactNode;
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  isForTablet: boolean;
-  isForDesktop: boolean;
+  isForTablet?: boolean;
+  isForDesktop?: boolean;
 }
 
 const BottomDrawer: React.FC<BottomDrawerProps> = ({ content, isOpen, setIsOpen, isForTablet, isForDesktop }) => {
