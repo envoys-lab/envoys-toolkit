@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import styled, { useTheme } from "styled-components";
+import styled from "styled-components";
 import getExternalLinkProps from "../../util/getExternalLinkProps";
 import Grid from "../../components/Box/Grid";
 import Box from "../../components/Box/Box";
-import getThemeValue from "../../util/getThemeValue";
-import Text from "../../components/Text/Text";
 import Heading from "../../components/Heading/Heading";
 import { Button } from "../../components/Button";
 import { ModalBody, ModalCloseButton, ModalContainer, ModalHeader, ModalTitle } from "../Modal";
@@ -51,20 +49,19 @@ const getPreferredConfig = (walletConfig: Config[]) => {
 
 const ConnectModal: React.FC<Props> = ({ login, onDismiss = () => null, displayCount = 3, t }) => {
   const [showMore, setShowMore] = useState(false);
-  const theme = useTheme();
   const sortedConfig = getPreferredConfig(config);
   const displayListConfig = showMore ? sortedConfig : sortedConfig.slice(0, displayCount);
 
   return (
     <ModalContainer minWidth="320px">
-      <ModalHeader background={getThemeValue("colors.gradients.bubblegum")(theme)}>
+      <ModalHeader>
         <ModalTitle>
           <Heading>{t("Connect Wallet")}</Heading>
         </ModalTitle>
         <ModalCloseButton onDismiss={onDismiss} />
       </ModalHeader>
       <ModalBody width={["320px", null, "340px"]}>
-        <WalletWrapper py="24px" maxHeight="453px" overflowY="auto">
+        <WalletWrapper px="24px" py="12px" maxHeight="453px" overflowY="auto">
           <Grid gridTemplateColumns="1fr 1fr">
             {displayListConfig.map((wallet) => (
               <Box key={wallet.title}>
@@ -74,18 +71,16 @@ const ConnectModal: React.FC<Props> = ({ login, onDismiss = () => null, displayC
             {sortedConfig.length === 0 && !showMore && <MoreWalletCard t={t} onClick={() => setShowMore(true)} />}
           </Grid>
         </WalletWrapper>
-        <Box p="24px">
-          <Text textAlign="center" color="textSubtle" as="p" mb="16px">
-            {t("Haven’t got a crypto wallet yet?")}
-          </Text>
+        <Box px="24px" py="12px">
           <Button
             as="a"
             href="https://metamask.io/faqs/"
-            variant="subtle"
+            variant="tertiary"
             width="100%"
+            style={{ borderColor: "transparent"}}
             {...getExternalLinkProps()}
           >
-            {t("Learn How to Connect")}
+            {t("How to Connect")}
           </Button>
         </Box>
       </ModalBody>
