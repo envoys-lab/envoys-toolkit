@@ -1,5 +1,5 @@
 import React, { cloneElement, Children, ReactElement } from "react";
-import styled, { useTheme } from "styled-components";
+import styled from "styled-components";
 import Flex from "../Box/Flex";
 import { TabMenuProps } from "./types";
 
@@ -62,6 +62,9 @@ const ButtonMenu: React.FC<TabMenuProps> = ({ fixedForItems = 0, activeIndex = 0
         {Children.map(children, (child: ReactElement, index) => {
           const isActive = activeIndex === index;
           const isLast = index === children.length - 1;
+          if (!child) {
+              return null;
+          }
           return (
             <Flex style={fixedForItems ? {width: `calc(100% / ${fixedForItems})`}: {}}>
               <TabWrapper className={fixedForItems ? 'fix-items': ''}>
