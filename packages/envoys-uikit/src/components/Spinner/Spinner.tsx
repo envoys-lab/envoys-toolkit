@@ -32,16 +32,18 @@ const Container = styled.div`
   position: relative;
 `;
 
-const RotatingLoadingIcon = styled(LoadingIcon)`
+const RotatingLoadingIcon = styled(LoadingIcon)<{size: number}>`
   transform: translate3d(0, 0, 0);
   animation: ${rotate} 2s linear infinite;
   z-index: 2;
   position: absolute;
   top: 50%;
   left: 50%;
-  margin: -25px 0 0 -25px;
-  width: 50px;
-  height: 50px;
+  ${({ size }) => `
+    margin: -${size/2}px 0 0 -${size/2}px;
+    width: ${size}px;
+    height: ${size}px;
+  `}
 
   & .path {
     stroke: ${({ theme }) => theme.colors.primary};
@@ -52,8 +54,8 @@ const RotatingLoadingIcon = styled(LoadingIcon)`
 
 const Spinner: React.FC<SpinnerProps> = ({ size = 128 }) => {
   return (
-    <Container>
-      <RotatingLoadingIcon width={`${size * 0.5}px`} />
+    <Container style={{ height: size }}>
+      <RotatingLoadingIcon size={size} />
     </Container>
   );
 };
