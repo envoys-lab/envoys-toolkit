@@ -56,7 +56,7 @@ const insertSeparators = (items: ReactNode[], separator: BreadcrumbsProps["separ
     ];
   }, []);
 
-const DefaultSeparator = <ChevronRightIcon color="currentColor" width="24px" />;
+const DefaultSeparator = <ChevronRightIcon width="24px" opacity={0.7} />;
 
 const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ separator = DefaultSeparator, children }) => {
   const validItems = Children.toArray(children).filter((child) => isValidElement(child));
