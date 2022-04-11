@@ -76,7 +76,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
   const accountEllipsis = account ? `${account.substring(0, 8)}...${account.substring(account.length - 4)}` : null;
   const { styles, attributes } = usePopper(targetRef, tooltipRef, {
     strategy: "fixed",
-    placement: "bottom-end",
+    placement: "top-start",
     modifiers: [{ name: "offset", options: { offset: [0, 0] } }],
   });
 
