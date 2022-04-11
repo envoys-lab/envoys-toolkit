@@ -1,6 +1,6 @@
 {
   "name": "@envoysvision/uikit",
-  "version": "0.63.13",
+  "version": "0.63.14",
   "description": "Set of UI components for envoys projects",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
@@ -18,8 +18,7 @@
     "format:write": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'",
     "storybook": "start-storybook -p 6006",
     "storybook:build": "build-storybook",
-    "test": "jest",
-    "prepublishOnly": "yarn build"
+    "test": "jest"
   },
   "jest": {
     "setupFilesAfterEnv": [
