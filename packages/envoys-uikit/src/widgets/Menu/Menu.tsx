@@ -148,11 +148,12 @@ const Menu: React.FC<NavProps> = ({
             <div />
           </TopBarContainer>
           <Space />
+          {showMenu && <Overlay onClick={onPressSideMenu}/>}
         </>
       ) : (
         ""
       )}
-      {showMenu && <Overlay onClick={onPressSideMenu}/>}
+
       <Wrapper>
         {lowResolutionMode && !showMenu ? (
           ""
