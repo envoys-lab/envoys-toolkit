@@ -11,6 +11,7 @@ import { NavProps } from "./types";
 import { MenuContext } from "./context";
 import { BurgerMenu } from "../../components/Svg";
 import IconButton from "../../components/Button/IconButton";
+import {Overlay} from "../../components/Overlay";
 
 const TopBarContainer = styled.div`
   position: fixed;
@@ -151,7 +152,7 @@ const Menu: React.FC<NavProps> = ({
       ) : (
         ""
       )}
-
+      {showMenu && <Overlay onClick={onPressSideMenu}/>}
       <Wrapper>
         {lowResolutionMode && !showMenu ? (
           ""
