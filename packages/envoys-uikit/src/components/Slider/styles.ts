@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Text from "../Text/Text";
 import bunnyHeadMain from "./svg/bunnyhead-main.svg";
 import bunnyHeadMax from "./svg/bunnyhead-max.svg";
-import bunnyButt from "./svg/bunnybutt.svg";
+import circle from "./svg/circle.svg";
 
 interface SliderLabelProps {
   progress: string;
@@ -56,11 +56,11 @@ export const SliderLabel = styled(Text)<SliderLabelProps>`
 `;
 
 export const BunnyButt = styled.div<DisabledProp>`
-  background: url(${bunnyButt}) no-repeat;
-  height: 32px;
+  background: url(${circle}) no-repeat;
+  height: 18px;
   filter: ${({ disabled }) => (disabled ? "grayscale(100%)" : "none")};
   position: absolute;
-  width: 15px;
+  width: 18px;
 `;
 
 export const BunnySlider = styled.div`
