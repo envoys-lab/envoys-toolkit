@@ -154,6 +154,7 @@ export { default as WalletIcon } from "./Icons/Wallet";
 export { default as WarningIcon } from "./Icons/Warning";
 export { default as BurgerMenu } from "./Icons/BurgerMenu";
 export { default as TokenIcon } from "./Icons/Token";
+export { default as TokenLabelIcon } from "./Icons/TokenLabel";
 
 export { default as Svg } from "./Svg";
 export type { SvgProps } from "./types";
