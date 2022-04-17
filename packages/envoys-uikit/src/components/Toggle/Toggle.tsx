@@ -6,8 +6,8 @@ import { ToggleProps, scales } from "./types";
 const Toggle: React.FC<ToggleProps> = ({
   checked,
   defaultColor = "input",
-  checkedColor = "success",
-  scale = scales.LG,
+  checkedColor = "secondary",
+  scale = scales.EV,
   startIcon,
   endIcon,
   ...props

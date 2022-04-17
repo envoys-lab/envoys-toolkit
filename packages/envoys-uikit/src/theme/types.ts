@@ -28,6 +28,7 @@ export type Shadows = {
   focus: string;
   inset: string;
   tooltip: string;
+  ev_focus: string;
 };
 
 export type Gradients = {
@@ -65,6 +66,7 @@ export type Colors = {
   backgroundAlt: string;
   backgroundAlt2: string;
   text: string;
+  raiseBorder: string;
   textDisabled: string;
   textSubtle: string;
   disabled: string;

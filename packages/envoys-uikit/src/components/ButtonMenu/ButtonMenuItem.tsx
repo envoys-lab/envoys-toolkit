@@ -17,6 +17,12 @@ const InactiveButton: PolymorphicComponent<InactiveButtonProps, "button"> = styl
   }
 `;
 
+const Container = styled.div`
+  background: #FFFFFF;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
+`
+
 const ButtonMenuItem: PolymorphicComponent<ButtonMenuItemProps, "button"> = ({
   isActive = false,
   variant = variants.PRIMARY,
@@ -24,10 +30,15 @@ const ButtonMenuItem: PolymorphicComponent<ButtonMenuItemProps, "button"> = ({
   ...props
 }: ButtonMenuItemProps) => {
   if (!isActive) {
-    return <InactiveButton forwardedAs={as} variant={variant} {...props} />;
+    return <Button as={as} variant="tevd" {...props} />;
+    // return <InactiveButton forwardedAs={as} variant={variant} {...props} />;
   }
 
-  return <Button as={as} variant={variant} {...props} />;
+  return (
+    <Container>
+      <Button as={as} variant={variant} {...props} />
+    </Container>
+  );
 };
 
 export default ButtonMenuItem;

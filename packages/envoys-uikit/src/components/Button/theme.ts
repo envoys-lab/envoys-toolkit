@@ -18,6 +18,16 @@ export const scaleVariants = {
     fontSize: "12px",
     padding: "0 8px",
   },
+  [scales.XS]: {
+    height: "20px",
+    fontSize: "12px",
+    padding: "0 8px",
+  },
+  [scales.TEV]: {
+    height: "22px",
+    fontSize: "12px",
+    padding: "0 10px",
+  },
 };
 
 export const styleVariants = {
@@ -67,5 +77,19 @@ export const styleVariants = {
     backgroundColor: "input",
     color: "textSubtle",
     boxShadow: "none",
+  },
+  [variants.TEV]: {
+    backgroundColor: "transparent",
+    color: "basicOrange",
+    fontSize: "12px",
+    fontWeight: "500",
+    lineHeight: "14px",
+  },
+  [variants.TEVD]: {
+    backgroundColor: "transparent",
+    color: "text",
+    fontSize: "12px",
+    fontWeight: "400",
+    lineHeight: "14px",
   },
 };

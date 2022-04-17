@@ -7,6 +7,7 @@ export const scales = {
   MD: "md",
   SM: "sm",
   XS: "xs",
+  TEV: "tev",
 } as const;
 
 export const variants = {
@@ -18,6 +19,8 @@ export const variants = {
   SUBTLE: "subtle",
   SUCCESS: "success",
   LIGHT: "light",
+  TEV: "tev",
+  TEVD: "tevd",
 } as const;
 
 export type Scale = typeof scales[keyof typeof scales];
