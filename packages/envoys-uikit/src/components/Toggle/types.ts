@@ -8,7 +8,7 @@ export const scales = {
   EV: "ev",
 } as const;
 
-export type Scales = typeof p[keyof typeof scales];
+export type Scales = typeof scales[keyof typeof scales];
 
 export interface ToggleProps extends InputHTMLAttributes<HTMLInputElement> {
   scale?: Scales;

@@ -1,8 +1,8 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
-import PanIcon from "./PanIcon";
-import EnvoysIcon from "./EnvoysIcon";
+import LoadingIcon from "./LoadingIcon";
 import { SpinnerProps } from "./types";
+
 
 const rotate = keyframes`
   from {
@@ -13,40 +13,49 @@ const rotate = keyframes`
   }
 `;
 
-const float = keyframes`
-	0% {
-		transform: translatey(0px);
-	}
-	50% {
-		transform: translatey(10px);
-	}
-	100% {
-		transform: translatey(0px);
-	}
-`;
+const dash = keyframes`
+  0% {
+    stroke-dasharray: 1, 150;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -35;
+  }
+  100% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -124;
+  }
+`
 
 const Container = styled.div`
   position: relative;
 `;
 
-const RotatingEnvoysIcon = styled(EnvoysIcon)`
-  position: absolute;
-  top: 0;
-  left: 0;
+const RotatingLoadingIcon = styled(LoadingIcon)<{size: number}>`
+  transform: translate3d(0, 0, 0);
   animation: ${rotate} 2s linear infinite;
-  transform: translate3d(0, 0, 0);
-`;
+  z-index: 2;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  ${({ size }) => `
+    margin: -${size/2}px 0 0 -${size/2}px;
+    width: ${size}px;
+    height: ${size}px;
+  `}
 
-const FloatingPanIcon = styled(PanIcon)`
-  animation: ${float} 6s ease-in-out infinite;
-  transform: translate3d(0, 0, 0);
-`;
+  & .path {
+    stroke: ${({ theme }) => theme.colors.primary};
+    stroke-linecap: round;
+    animation: ${dash} 1.5s ease-in-out infinite;
+  }
+`
 
 const Spinner: React.FC<SpinnerProps> = ({ size = 128 }) => {
   return (
-    <Container>
-      <RotatingEnvoysIcon width={`${size * 0.5}px`} />
-      <FloatingPanIcon width={`${size}px`} />
+    <Container style={{ height: size }}>
+      <RotatingLoadingIcon size={size} />
     </Container>
   );
 };

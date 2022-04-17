@@ -14,16 +14,18 @@ interface BottomDrawerProps {
   content: React.ReactNode;
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  isForTablet?: boolean;
+  isForDesktop?: boolean;
 }
 
-const BottomDrawer: React.FC<BottomDrawerProps> = ({ content, isOpen, setIsOpen }) => {
+const BottomDrawer: React.FC<BottomDrawerProps> = ({ content, isOpen, setIsOpen, isForTablet, isForDesktop }) => {
   const ref = useRef<HTMLDivElement>(null);
   const shouldRender = useDelayedUnmount(isOpen, 350);
-  const { isMobile } = useMatchBreakpoints();
+  const { isMobile, isTablet, isDesktop } = useMatchBreakpoints();
 
   useOnClickOutside(ref, () => setIsOpen(false));
 
-  if (!shouldRender || !isMobile) {
+  if (!(shouldRender && (isMobile || (isDesktop && isForDesktop) || (isTablet && isForTablet)))) {
     return null;
   }
 

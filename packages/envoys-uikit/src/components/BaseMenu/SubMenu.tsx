@@ -4,9 +4,9 @@ import BaseMenu from "./BaseMenu";
 import { SubMenuContainer } from "./styles";
 import { BaseMenuProps } from "./types";
 
-const SubMenu: React.FC<BaseMenuProps & FlexProps> = ({ children, component, options, isOpen = false, ...props }) => {
+const SubMenu: React.FC<BaseMenuProps & FlexProps> = ({ children, component, options, isOpen = false, onClose, ...props }) => {
   return (
-    <BaseMenu component={component} options={options} isOpen={isOpen}>
+    <BaseMenu component={component} options={options} isOpen={isOpen} onClose={onClose}>
       <SubMenuContainer {...props}>{children}</SubMenuContainer>
     </BaseMenu>
   );

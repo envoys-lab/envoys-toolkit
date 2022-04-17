@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import { createPortal } from "react-dom";
 import { usePopper } from "react-popper";
 import { ClickableElementContainer } from "./styles";
 import { BaseMenuProps } from "./types";
 import getPortalRoot from "../../util/getPortalRoot";
 
-const BaseMenu: React.FC<BaseMenuProps> = ({ component, options, children, isOpen = false }) => {
+const BaseMenu: React.FC<BaseMenuProps> = ({ component, options, children, isOpen = false, onClose }) => {
   const [targetElement, setTargetElement] = useState<HTMLElement | null>(null);
   const [menuElement, setMenuElement] = useState<HTMLElement | null>(null);
   const placement = options?.placement ?? "bottom";
@@ -24,6 +24,9 @@ const BaseMenu: React.FC<BaseMenuProps> = ({ component, options, children, isOpe
 
   const close = () => {
     setIsMenuOpen(false);
+    if (onClose && typeof onClose === 'function') {
+      onClose();
+    }
   };
 
   // Allow for component to be controlled
@@ -41,6 +44,9 @@ const BaseMenu: React.FC<BaseMenuProps> = ({ component, options, children, isOpe
           !targetElement.contains(target)
         ) {
           setIsMenuOpen(false);
+          if (onClose && typeof onClose === 'function') {
+            onClose();
+          }
         }
       }
     };
@@ -50,7 +56,7 @@ const BaseMenu: React.FC<BaseMenuProps> = ({ component, options, children, isOpe
     return () => {
       document.removeEventListener("click", handleClickOutside);
     };
-  }, [menuElement, targetElement]);
+  }, [menuElement, targetElement, onClose]);
 
   const { styles, attributes } = usePopper(targetElement, menuElement, {
     placement,

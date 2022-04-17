@@ -17,6 +17,7 @@ export interface LinkStatus {
 
 export interface NavProps {
   linkComponent?: ElementType;
+  searchBar?: ReactElement;
   userMenu?: ReactElement;
   banner?: ReactElement;
   globalMenu?: ReactElement;

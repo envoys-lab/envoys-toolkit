@@ -54,7 +54,6 @@ export const styleVariants = {
     ":disabled": {
       borderColor: "backgroundPage",
     },
-    marginBottom: 1,
   },
   [variants.SUBTLE]: {
     backgroundColor: "textSubtle",

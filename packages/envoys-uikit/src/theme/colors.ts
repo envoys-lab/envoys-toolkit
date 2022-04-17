@@ -1,7 +1,7 @@
 import { Colors } from "./types";
 
 export const baseColors = {
-  failure: "#ED4B9E",
+  failure: "#F15555",
   primary: "#2261DA",
   primaryBright: "#53DEE9",
   primaryDark: "#0098A1",
@@ -9,7 +9,7 @@ export const baseColors = {
   buttonTitle: "#133D65",
   success: "#44AE9B",
   warning: "#FFB237",
-  error: "#f15555",
+  error: "#F15555",
 };
 
 export const additionalColors = {
@@ -35,7 +35,7 @@ export const lightColors: Colors = {
   backgroundAlt: "#FFFFFF",
   backgroundAlt2: "rgba(255, 255, 255, 0.7)",
   tipBackground: "rgba(54, 111, 221, 0.05)",
-  cardBorder: "rgba(19, 61, 101, 0.05)",
+  cardBorder: "rgba(19, 61, 101, 0.1)",
   contrast: "#191326",
   dropdown: "#F6F6F6",
   dropdownDeep: "#EEEEEE",

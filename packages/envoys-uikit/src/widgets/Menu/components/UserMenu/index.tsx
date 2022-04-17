@@ -2,10 +2,7 @@ import React, { useEffect, useState } from "react";
 import { usePopper } from "react-popper";
 import styled from "styled-components";
 import { Box, Flex } from "../../../../components/Box";
-import { ChevronDownIcon } from "../../../../components/Svg";
 import { UserMenuProps, variants } from "./types";
-import MenuIcon from "./MenuIcon";
-import { UserMenuItem } from "./styles";
 
 export const StyledUserMenu = styled(Flex)`
   align-items: center;
@@ -40,7 +37,7 @@ export const LabelText = styled.div`
 const Menu = styled.div<{ isOpen: boolean }>`
   background-color: ${({ theme }) => theme.card.background};
 
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.06);
   backdrop-filter: blur(40px);
 
   border-radius: 14px;
@@ -48,7 +45,7 @@ const Menu = styled.div<{ isOpen: boolean }>`
   padding: 17px 20px 17px 20px;
 
   pointer-events: auto;
-  width: 280px;
+  width: 240px;
   visibility: visible;
   z-index: 1001;
 
@@ -76,7 +73,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
   const accountEllipsis = account ? `${account.substring(0, 8)}...${account.substring(account.length - 4)}` : null;
   const { styles, attributes } = usePopper(targetRef, tooltipRef, {
     strategy: "fixed",
-    placement: "bottom-end",
+    placement: "top-start",
     modifiers: [{ name: "offset", options: { offset: [0, 0] } }],
   });
 
@@ -113,7 +110,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
         <IconContainer>{LeftSideIcon ? <LeftSideIcon /> : ""}</IconContainer>
       </StyledUserMenu>
       <Menu style={styles.popper} ref={setTooltipRef} {...attributes.popper} isOpen={isOpen}>
-        <Box onClick={() => setIsOpen(false)}>{children}</Box>
+        <Box onClick={() => setIsOpen(false)} p="0" m="0">{children}</Box>
       </Menu>
     </Flex>
   );

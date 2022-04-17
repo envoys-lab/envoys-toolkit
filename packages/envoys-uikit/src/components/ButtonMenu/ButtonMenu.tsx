@@ -8,6 +8,17 @@ interface StyledButtonMenuProps extends ButtonMenuProps {
   theme: DefaultTheme;
 }
 
+// <<<<<<< HEAD
+/* =======
+const StyledButtonMenu = styled.div<StyledButtonMenuProps>`
+  background-color: ${({ theme }) => theme.colors.input};
+  border-radius: ${({ slim }) => (slim ? '43px' : '16px')};
+  display: ${({ fullWidth }) => (fullWidth ? 'flex' : 'inline-flex')};
+  width: ${({ fullWidth }) => (fullWidth ? '100%' : 'auto')};
+  box-shadow: ${({ theme }) => theme.shadows.inset};
+  padding: 0 8px;
+>>>>>>> develop */
+
 const getBackgroundColor = ({ theme, variant }: StyledButtonMenuProps) => {
   return theme.colors[variant === variants.SUBTLE ? "input" : "tertiary"];
 };
@@ -23,6 +34,7 @@ const StyledButtonMenu = styled.div<StyledButtonMenuProps>`
   /* border: 1px solid ${getBorderColor}; */
   width: ${({ fullWidth }) => (fullWidth ? "100%" : "auto")};
   padding: 4px 4px;
+
   & > button,
   & > a {
     flex: ${({ fullWidth }) => (fullWidth ? 1 : "auto")};

@@ -29,6 +29,7 @@ export type Shadows = {
   inset: string;
   tooltip: string;
   ev_focus: string;
+  badge: string;
 };
 
 export type Gradients = {
