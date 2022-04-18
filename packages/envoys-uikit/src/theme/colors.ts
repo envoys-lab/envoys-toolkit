@@ -8,7 +8,7 @@ export const baseColors = {
   secondary: "#F48020",
   buttonTitle: "#133D65",
   success: "#44AE9B",
-  warning: "#FFB237",
+  warning: "#F48020",
   error: "#F15555",
 };
 

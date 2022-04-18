@@ -3,9 +3,11 @@ import { MediaQueries, Breakpoints, Spacing } from "./types";
 export const breakpointMap: { [key: string]: number } = {
   xs: 370,
   sm: 576,
+  mdl: 680,
   md: 852,
   lg: 968,
   xl: 1080,
+  xlm: 1100,
   xxl: 1200,
 };
 
@@ -14,9 +16,11 @@ const breakpoints: Breakpoints = Object.values(breakpointMap).map((breakpoint) =
 const mediaQueries: MediaQueries = {
   xs: `@media screen and (min-width: ${breakpointMap.xs}px)`,
   sm: `@media screen and (min-width: ${breakpointMap.sm}px)`,
+  mdl: `@media screen and (min-width: ${breakpointMap.mdl}px)`,
   md: `@media screen and (min-width: ${breakpointMap.md}px)`,
   lg: `@media screen and (min-width: ${breakpointMap.lg}px)`,
   xl: `@media screen and (min-width: ${breakpointMap.xl}px)`,
+  xlm: `@media screen and (min-width: ${breakpointMap.xlm}px)`,
   xxl: `@media screen and (min-width: ${breakpointMap.xxl}px)`,
   nav: `@media screen and (min-width: ${breakpointMap.lg}px)`,
 };

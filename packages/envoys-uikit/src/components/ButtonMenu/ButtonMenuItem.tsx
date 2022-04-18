@@ -20,21 +20,32 @@ const InactiveButton: PolymorphicComponent<InactiveButtonProps, "button"> = styl
 `
 
 const ActiveButton = styled(Button)<BaseButtonProps>`
-  ${({ theme, variant }) => 
-    variant !== variants.PRIMARY && (`
-      background: white;
-      border: 1px solid ${theme.colors.cardBorder};
-      box-shadow: ${theme.shadows.focus};
-      color: ${theme.colors.basicOrange};
-      font-weight: 500;
-      `)
-  }
-`
+  ${({ theme, variant }) => {
 
-const Container = styled.div`
-  background: #FFFFFF;
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.05);
-  border-radius: 12px;
+    if (variant === variants.TEVD) {
+      return (`
+        background: #FFFFFF;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.05) !important;
+        border-radius: 12px;
+        color: ${theme.colors.basicOrange};
+        font-weight: 500 !important;
+        font-size: 12px;
+        line-height: 14px;
+      `)
+    }
+
+    if (variant !== variants.PRIMARY) {
+      return (`
+        background: white;
+        border: 1px solid ${theme.colors.cardBorder};
+        box-shadow: ${theme.shadows.focus};
+        color: ${theme.colors.basicOrange};
+        font-weight: 500;
+        `)
+    }
+  }
+    
+  }
 `
 
 const ButtonMenuItem: PolymorphicComponent<ButtonMenuItemProps, "button"> = ({
@@ -44,8 +55,8 @@ const ButtonMenuItem: PolymorphicComponent<ButtonMenuItemProps, "button"> = ({
   ...props
 }: ButtonMenuItemProps) => {
   if (!isActive) {
-    return <Button as={as} variant="tevd" {...props} />;
-    // return <InactiveButton forwardedAs={as} variant={variant} {...props} />;
+    // return <Button as={as} variant="tevd" {...props} />;
+    return <InactiveButton forwardedAs={as} variant={variant} {...props} />;
   }
 
 // <<<<<<< HEAD
