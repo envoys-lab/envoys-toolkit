@@ -27,30 +27,12 @@ const TokenPairImage: React.FC<TokenPairImageProps> = ({
   secondaryImageProps = {},
   ...props
 }) => {
-// <<<<<<< HEAD
-
   return (
     <Wrapper position="relative" width={width} height={height} {...props}>
       <Image src={primarySrc}/>
       <RightImage src={secondarySrc}/>
     </Wrapper>
   );
-
- //     {/* <StyledPrimaryImage variant={variant} src={primarySrc} width={width} height={height} {...primaryImageProps} />
-// =======
-//   return (
-//     <Wrapper position="relative" width={width * 1.8} height={height} {...props}>
-//       <StyledPrimaryImage variant={variant} src={primarySrc} width={width} height={height} {...primaryImageProps} />
-// >>>>>>> develop
-//       <StyledSecondaryImage
-//         variant={variant}
-//         src={secondarySrc}
-//         width={width}
-//         height={height}
-//         {...secondaryImageProps}
-//       /> */}
-    
-  
 };
 
 export default TokenPairImage;
