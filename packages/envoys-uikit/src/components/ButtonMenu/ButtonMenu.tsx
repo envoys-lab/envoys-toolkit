@@ -13,7 +13,7 @@ const StyledButtonMenu = styled.div<StyledButtonMenuProps>`
   border-radius: ${({ slim }) => (slim ? '43px' : '16px')};
   display: ${({ fullWidth }) => (fullWidth ? 'flex' : 'inline-flex')};
   width: ${({ fullWidth }) => (fullWidth ? '100%' : 'auto')};
-  box-shadow: ${({ theme }) => theme.shadows.inset};
+  box-shadow: ${({ theme, noShadow }) => noShadow ? 'none' : theme.shadows.inset};
   padding: 0 8px;
   & > button,
   & > a {
@@ -66,10 +66,11 @@ const ButtonMenu: React.FC<ButtonMenuProps> = ({
   children,
   fullWidth = false,
   slim = false,
+  noShadow = false,
   ...props
 }) => {
   return (
-      <StyledButtonMenu disabled={disabled} variant={variant} fullWidth={fullWidth} slim={slim} {...props}>
+      <StyledButtonMenu disabled={disabled} variant={variant} fullWidth={fullWidth} slim={slim} noShadow={noShadow} {...props}>
         {Children.map(children, (child: ReactElement, index) => {
           return cloneElement(child, {
             isActive: activeIndex === index,
