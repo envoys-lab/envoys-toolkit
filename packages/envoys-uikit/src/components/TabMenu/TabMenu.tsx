@@ -12,10 +12,10 @@ const Inner = styled(Flex)`
   }
 `;
 
-const TabWrapper = styled.div<{ verticalMargin: number; }>`
+const TabWrapper = styled.div<{ verticalMargin?: number; }>`
   margin: 0 25px;
   ${({ theme }) => theme.mediaQueries.md} {
-    margin: 0 ${({ verticalMargin }) => (verticalMargin + 'px')};
+    margin: 0 ${({ verticalMargin }) => ((verticalMargin ?? 30) + 'px')};
   }
   &.fix-items {
     margin: 0 auto;

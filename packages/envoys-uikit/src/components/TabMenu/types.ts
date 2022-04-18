@@ -5,7 +5,7 @@ export interface TabMenuProps {
   onItemClick?: (index: number) => void;
   children: React.ReactElement[];
   fixedForItems?: number;
-  verticalMargin: number;
+  verticalMargin?: number;
 }
 export interface TabProps extends ColorProps {
   isLast?: boolean;
