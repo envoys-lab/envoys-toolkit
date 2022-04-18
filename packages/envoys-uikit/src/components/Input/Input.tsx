@@ -58,9 +58,9 @@ const Input = styled.input<InputProps>`
     cursor: not-allowed;
   }
 
-  &:focus:not(:disabled) {
+  /*&:focus:not(:disabled) {
     box-shadow: inset ${({ theme }) => theme.shadows.focus};
-  }
+  }*/
 `;
 
 Input.defaultProps = {
