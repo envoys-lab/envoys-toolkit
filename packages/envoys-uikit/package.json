@@ -1,6 +1,6 @@
 {
   "name": "@envoysvision/uikit",
-  "version": "0.63.25",
+  "version": "0.63.26",
   "description": "Set of UI components for envoys projects",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
