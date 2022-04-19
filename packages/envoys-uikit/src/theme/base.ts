@@ -31,7 +31,7 @@ export const shadows = {
   // inset: "inset 0px 2px 2px -1px rgba(74, 74, 104, 0.1)",
   inset: "inset 0px 4px 6px rgba(0, 23, 43, 0.05)",
   tooltip: "0px 0px 2px rgba(0, 0, 0, 0.2), 0px 4px 12px -8px rgba(14, 14, 44, 0.1)",
-  ev_focus: "0px 0px 0px 1px #2261DA, 0px 0px 0px 4px rgba(34, 97, 218, 0.6)",
+  evFocus: "0px 0px 0px 1px #2261DA, 0px 0px 0px 4px rgba(34, 97, 218, 0.6)",
   badge: "0px 2px 2px rgba(0, 0, 0, 0.05)"
 };
 
