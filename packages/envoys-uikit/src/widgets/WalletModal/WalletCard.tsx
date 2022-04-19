@@ -43,7 +43,6 @@ const WalletCard: React.FC<Props> = ({ login, walletConfig, onDismiss }) => {
     <WalletButton
       variant="tertiary"
       onClick={() => {
-        // @ts-expect-error: Expected MSStream error
         const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 
         // Since iOS does not support Trust Wallet we fall back to WalletConnect
