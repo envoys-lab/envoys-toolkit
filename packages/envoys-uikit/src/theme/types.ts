@@ -4,10 +4,8 @@ export type MediaQueries = {
   xs: string;
   sm: string;
   md: string;
-  mdl: string;
   lg: string;
   xl: string;
-  xlm: string;
   xxl: string;
   nav: string;
 };
@@ -30,7 +28,7 @@ export type Shadows = {
   focus: string;
   inset: string;
   tooltip: string;
-  ev_focus: string;
+  evFocus: string;
   badge: string;
 };
 
