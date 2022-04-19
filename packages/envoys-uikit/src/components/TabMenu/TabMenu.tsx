@@ -12,10 +12,10 @@ const Inner = styled(Flex)`
   }
 `;
 
-const TabWrapper = styled.div`
+const TabWrapper = styled.div<{ verticalMargin?: number; }>`
   margin: 0 25px;
   ${({ theme }) => theme.mediaQueries.md} {
-    margin: 0 30px;
+    margin: 0 ${({ verticalMargin }) => ((verticalMargin ?? 30) + 'px')};
   }
   &.fix-items {
     margin: 0 auto;
@@ -55,7 +55,7 @@ const BottomDivider = styled(Flex)`
 `;
 
 
-const ButtonMenu: React.FC<TabMenuProps> = ({ fixedForItems = 0, activeIndex = 0, onItemClick, children }) => {
+const ButtonMenu: React.FC<TabMenuProps> = ({ fixedForItems = 0, activeIndex = 0, verticalMargin = 30, onItemClick, children }) => {
   return (
     <Wrapper className={fixedForItems ? 'fix-items': ''}>
       <Inner className={fixedForItems ? 'fix-items': ''}>
@@ -67,7 +67,7 @@ const ButtonMenu: React.FC<TabMenuProps> = ({ fixedForItems = 0, activeIndex = 0
           }
           return (
             <Flex style={fixedForItems ? {width: `calc(100% / ${fixedForItems})`}: {}}>
-              <TabWrapper className={fixedForItems ? 'fix-items': ''}>
+              <TabWrapper verticalMargin={verticalMargin} className={fixedForItems ? 'fix-items': ''}>
                 {cloneElement(child, {
                   isLast,
                   isActive,

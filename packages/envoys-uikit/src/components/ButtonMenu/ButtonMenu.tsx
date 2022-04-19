@@ -8,16 +8,25 @@ interface StyledButtonMenuProps extends ButtonMenuProps {
   theme: DefaultTheme;
 }
 
+const getBackgroundColor = ({ theme, variant }: StyledButtonMenuProps) => {
+  return theme.colors[variant === variants.SUBTLE ? "input" : "tertiary"];
+};
+
+const getBorderColor = ({ theme, variant, slim }: StyledButtonMenuProps) => {
+  return slim ? "transparent" : theme.colors[variant === variants.SUBTLE ? "inputSecondary" : "disabled"];
+};
+
 const StyledButtonMenu = styled.div<StyledButtonMenuProps>`
-  background-color: ${({ theme }) => theme.colors.input};
-  border-radius: ${({ slim }) => (slim ? '43px' : '16px')};
-  display: ${({ fullWidth }) => (fullWidth ? 'flex' : 'inline-flex')};
-  width: ${({ fullWidth }) => (fullWidth ? '100%' : 'auto')};
-  box-shadow: ${({ theme, noShadow }) => noShadow ? 'none' : theme.shadows.inset};
-  padding: 0 8px;
+  background-color: ${getBackgroundColor};
+  border-radius: ${({ slim }) => (slim ? "18px" : "18px")};
+  display: ${({ fullWidth }) => (fullWidth ? "flex" : "inline-flex")};
+  /* border: 1px solid ${getBorderColor}; */
+  width: ${({ fullWidth }) => (fullWidth ? "100%" : "auto")};
+  padding: 4px 4px;
+
   & > button,
   & > a {
-    flex: ${({ fullWidth }) => (fullWidth ? 1 : 'auto')};
+    flex: ${({ fullWidth }) => (fullWidth ? 1 : "auto")};
     ${({ slim }) => {
       if (slim) {
         return `
@@ -27,10 +36,10 @@ const StyledButtonMenu = styled.div<StyledButtonMenuProps>`
           height: 26px;
       `;
       }
-      return '';
+      return "";
     }}
   }
-  
+
   & > button + button,
   & > a + a {
     margin-left: 2px; // To avoid focus shadow overlap
@@ -70,17 +79,24 @@ const ButtonMenu: React.FC<ButtonMenuProps> = ({
   ...props
 }) => {
   return (
-      <StyledButtonMenu disabled={disabled} variant={variant} fullWidth={fullWidth} slim={slim} noShadow={noShadow} {...props}>
-        {Children.map(children, (child: ReactElement, index) => {
-          return cloneElement(child, {
-            isActive: activeIndex === index,
-            onClick: onItemClick ? () => onItemClick(index) : undefined,
-            scale,
-            variant,
-            disabled,
-          });
-        })}
-      </StyledButtonMenu>
+    <StyledButtonMenu
+      disabled={disabled}
+      variant={variant}
+      fullWidth={fullWidth}
+      slim={slim}
+      noShadow={noShadow}
+      {...props}
+    >
+      {Children.map(children, (child: ReactElement, index) => {
+        return cloneElement(child, {
+          isActive: activeIndex === index,
+          onClick: onItemClick ? () => onItemClick(index) : undefined,
+          scale,
+          variant,
+          disabled,
+        });
+      })}
+    </StyledButtonMenu>
   );
 };
 

@@ -75,8 +75,9 @@ const CloseHandler = styled.div`
 const StyledAlert = styled(Flex)`
   position: relative;
   background-color: ${({ theme }) => theme.alert.background};
-  border-radius: 16px;
-  box-shadow: 0 20px 36px -8px rgba(14, 14, 44, 0.1), 0 1px 1px rgba(0, 0, 0, 0.05);
+  border-radius: 14px;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.06);
+  backdrop-filter: blur(40px);
 `;
 
 const Alert: React.FC<AlertProps> = ({ title, children, variant, onClick }) => {

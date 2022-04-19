@@ -4,8 +4,10 @@ export type MediaQueries = {
   xs: string;
   sm: string;
   md: string;
+  mdl: string;
   lg: string;
   xl: string;
+  xlm: string;
   xxl: string;
   nav: string;
 };
@@ -28,6 +30,7 @@ export type Shadows = {
   focus: string;
   inset: string;
   tooltip: string;
+  ev_focus: string;
   badge: string;
 };
 
@@ -66,6 +69,7 @@ export type Colors = {
   backgroundAlt: string;
   backgroundAlt2: string;
   text: string;
+  raiseBorder: string;
   textDisabled: string;
   textSubtle: string;
   disabled: string;

@@ -8,7 +8,7 @@ export const baseColors = {
   secondary: "#F48020",
   buttonTitle: "#133D65",
   success: "#44AE9B",
-  warning: "#FFB237",
+  warning: "#F48020",
   error: "#F15555",
 };
 
@@ -44,7 +44,8 @@ export const lightColors: Colors = {
   inputSecondary: "#d7caec",
   tertiary: "#F9F9F9",
   text: "#133D65",
-  // textDisabled: "#BDC2C4",
+  raiseBorder: "#045599",
+  //textDisabled: "#BDC2C4",
   textDisabled: "#ffffff",
   textSubtle: "#0F2B46",
   disabled: "#E9EAEB",
@@ -81,6 +82,7 @@ export const darkColors: Colors = {
   primaryDark: "#0098A1",
   tertiary: "#353547",
   text: "#F4EEFF",
+  raiseBorder: "#045599",
   textDisabled: "#666171",
   textSubtle: "#B8ADD2",
   disabled: "#524B63",

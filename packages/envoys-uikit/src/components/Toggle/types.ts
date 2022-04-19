@@ -5,6 +5,7 @@ export const scales = {
   SM: "sm",
   MD: "md",
   LG: "lg",
+  EV: "ev",
 } as const;
 
 export type Scales = typeof scales[keyof typeof scales];

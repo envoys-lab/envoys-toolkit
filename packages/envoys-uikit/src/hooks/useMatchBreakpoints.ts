@@ -99,7 +99,7 @@ const useMatchBreakpoints = (): BreakpointChecks => {
   return {
     ...state,
     isMobile: state.isXs || state.isSm,
-    isTablet: state.isMd || state.isLg,
+    isTablet: state.isMdl || state.isMd || state.isLg,
     isDesktop: state.isXl || state.isXxl,
   };
 };
