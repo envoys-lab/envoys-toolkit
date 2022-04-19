@@ -97,6 +97,7 @@ export const BarBackground = styled.div<DisabledProp>`
 `;
 
 export const BarProgress = styled.div<DisabledProp>`
+  margin-left: 2px;
   background-color: ${({ theme }) => theme.colors.primary};
   filter: ${({ disabled }) => (disabled ? "grayscale(100%)" : "none")};
   height: 10px;
