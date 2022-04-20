@@ -72,7 +72,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
   const [tooltipRef, setTooltipRef] = useState<HTMLDivElement | null>(null);
   const accountEllipsis = account ? `${account.substring(0, 8)}...${account.substring(account.length - 4)}` : null;
   const { styles, attributes } = usePopper(targetRef, tooltipRef, {
-    strategy: "fixed",
+    // strategy: "fixed",
     placement: "top-start",
     modifiers: [{ name: "offset", options: { offset: [0, 0] } }],
   });
@@ -110,7 +110,9 @@ const UserMenu: React.FC<UserMenuProps> = ({
         <IconContainer>{LeftSideIcon ? <LeftSideIcon /> : ""}</IconContainer>
       </StyledUserMenu>
       <Menu style={styles.popper} ref={setTooltipRef} {...attributes.popper} isOpen={isOpen}>
-        <Box onClick={() => setIsOpen(false)} p="0" m="0">{children}</Box>
+        <Box onClick={() => setIsOpen(false)} p="0" m="0">
+          {children}
+        </Box>
       </Menu>
     </Flex>
   );
