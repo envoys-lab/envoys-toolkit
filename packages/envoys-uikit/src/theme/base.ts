@@ -9,13 +9,7 @@ export const breakpointMap: { [key: string]: number } = {
   xxl: 1200,
 };
 
-export const breakpointMapCustom: { [key: string]: number } = {
-  mdl: 680,
-  xlm: 1100,
-}
-
 const breakpoints: Breakpoints = Object.values(breakpointMap).map((breakpoint) => `${breakpoint}px`);
-const breakpointsCustom: Breakpoints = Object.values(breakpointMapCustom).map((breakpoint) => `${breakpoint}px`);
 
 const mediaQueries: MediaQueries = {
   xs: `@media screen and (min-width: ${breakpointMap.xs}px)`,
@@ -25,8 +19,6 @@ const mediaQueries: MediaQueries = {
   xl: `@media screen and (min-width: ${breakpointMap.xl}px)`,
   xxl: `@media screen and (min-width: ${breakpointMap.xxl}px)`,
   nav: `@media screen and (min-width: ${breakpointMap.lg}px)`,
-  mdl: `@media screen and (min-width: ${breakpointMapCustom.mdl}px)`,
-  xlm: `@media screen and (min-width: ${breakpointMapCustom.xlm}px)`,
 };
 
 export const shadows = {
@@ -61,7 +53,6 @@ const zIndices = {
 export default {
   siteWidth: 1200,
   breakpoints,
-  breakpointsCustom,
   mediaQueries,
   spacing,
   shadows,

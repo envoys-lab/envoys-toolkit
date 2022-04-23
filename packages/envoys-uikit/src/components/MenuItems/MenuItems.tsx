@@ -1,10 +1,7 @@
 import React from "react";
 import styled, { useTheme } from "styled-components";
 import { Flex } from "../Box";
-import isTouchDevice from "../../util/isTouchDevice";
-import DropdownMenu from "../DropdownMenu/DropdownMenu";
 import MenuItem from "../MenuItem/MenuItem";
-import IconComponent from "../Svg/IconComponent";
 import { MenuItemsProps, StyledDisabledMenuItemProps } from "./types";
 import { StyledIconContainerProps } from "../MenuItem/types";
 
@@ -34,7 +31,7 @@ const MenuItems: React.FC<MenuItemsProps> = ({ items = [], activeItem, activeSub
         const statusColor = menuItems?.find((menuItem) => menuItem.status !== undefined)?.status?.color;
         const isActive = activeItem === href;
 
-        const linkProps = isTouchDevice() && menuItems && menuItems.length > 0 ? {} : { href };
+        const linkProps = /* isTouchDevice() && menuItems && menuItems.length > 0 ? {} : */ { href };
         return active === false ? (
           <DisabledMenuItem key={`${label}#${href}`} $targetColor={theme.colors.disabledMenuItem}>
             <IconContainer isActive={false}>{Icon ? <Icon color={theme.colors.disabledMenuItem} /> : ""}</IconContainer>
