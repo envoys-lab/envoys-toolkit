@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { breakpointMap as breakpointMapDefault, breakpointMapCustom } from "../theme/base";
+import { breakpointMap } from "../theme/base";
 import { useIsomorphicEffect } from "./useIsomorphicEffect";
 
 type State = {
@@ -15,11 +15,6 @@ type BreakpointChecks = {
 type MediaQueries = {
   [key: string]: string;
 };
-const breakpointMapValues = Object.entries({...breakpointMapDefault, ...breakpointMapCustom}).sort((a, b) => a[1] - b[1]);
-const breakpointMap = breakpointMapValues.reduce((acc: any, item) => {
-  acc[item[0]] = item[1];
-  return acc;
-}, {});
 
 /**
  * Can't use the media queries from "base.mediaQueries" because of how matchMedia works
@@ -49,7 +44,7 @@ const mediaQueries: MediaQueries = (() => {
 const getKey = (size: string) => `is${size.charAt(0).toUpperCase()}${size.slice(1)}`;
 
 const getState = () => {
-  const s = Object.keys(mediaQueries).reduce((accum, size) => {
+  return Object.keys(mediaQueries).reduce((accum, size) => {
     const key = getKey(size);
     if (typeof window === "undefined") {
       return {
@@ -60,7 +55,6 @@ const getState = () => {
     const mql = window.matchMedia(mediaQueries[size]);
     return { ...accum, [key]: mql?.matches ?? false };
   }, {});
-  return s;
 };
 
 const useMatchBreakpoints = (): BreakpointChecks => {

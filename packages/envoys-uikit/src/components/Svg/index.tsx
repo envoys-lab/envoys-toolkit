@@ -1,6 +1,7 @@
 export { default as AccountFilledIcon } from "./Icons/AccountFilled";
 export { default as AccountIcon } from "./Icons/Account";
 export { default as AddIcon } from "./Icons/Add";
+export { default as AddCircleOutlineIcon } from "./Icons/AddCircleOutline";
 export { default as ArrowBackIcon } from "./Icons/ArrowBack";
 export { default as ArrowBackIconV2 } from "./Icons/ArrowBackV2";
 export { default as ArrowDownIcon } from "./Icons/ArrowDown";
