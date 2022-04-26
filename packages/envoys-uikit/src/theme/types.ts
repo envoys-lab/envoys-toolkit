@@ -21,6 +21,7 @@ export type Radii = {
 };
 
 export type Shadows = {
+  level0: string;
   level1: string;
   active: string;
   success: string;
