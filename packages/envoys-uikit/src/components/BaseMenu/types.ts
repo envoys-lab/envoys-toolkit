@@ -9,6 +9,7 @@ export interface MenuOptions {
 
 export interface BaseMenuProps {
   component: ReactNode;
+  fitToComponent?: HTMLElement;
   options?: MenuOptions;
   isOpen?: boolean;
   onClose?: () => void;

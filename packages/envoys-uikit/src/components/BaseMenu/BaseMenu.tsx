@@ -5,11 +5,11 @@ import { ClickableElementContainer } from "./styles";
 import { BaseMenuProps } from "./types";
 import getPortalRoot from "../../util/getPortalRoot";
 
-const BaseMenu: React.FC<BaseMenuProps> = ({ component, options, children, isOpen = false, onClose }) => {
+const BaseMenu: React.FC<BaseMenuProps> = ({ component, fitToComponent, options, children, isOpen = false, onClose }) => {
   const [targetElement, setTargetElement] = useState<HTMLElement | null>(null);
   const [menuElement, setMenuElement] = useState<HTMLElement | null>(null);
-  const placement = options?.placement ?? "bottom";
-  const offset = options?.offset ?? [0, 10];
+  let placement = options?.placement ?? "bottom";
+  let offset = options?.offset ?? [0, 10];
   const padding = options?.padding ?? { left: 16, right: 16 };
 
   const [isMenuOpen, setIsMenuOpen] = useState(isOpen);
@@ -58,6 +58,10 @@ const BaseMenu: React.FC<BaseMenuProps> = ({ component, options, children, isOpe
     };
   }, [menuElement, targetElement, onClose]);
 
+  if (fitToComponent) {
+    placement = 'bottom-end';
+    offset = [0, 24];
+  }
   const { styles, attributes } = usePopper(targetElement, menuElement, {
     placement,
     modifiers: [
