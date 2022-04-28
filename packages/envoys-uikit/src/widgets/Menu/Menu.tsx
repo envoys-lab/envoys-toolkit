@@ -34,7 +34,7 @@ const TopBarContainer = styled.div`
 `;
 
 const MenusContainer = styled.div`
-  margin: 0 20px 10px;
+  margin: 0 16px 10px;
 `;
 
 const Wrapper = styled.div`
