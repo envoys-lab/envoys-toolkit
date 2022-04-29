@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Box, Flex } from "../Box";
 
 export const InlineMenuContainer = styled(Box)`
@@ -37,3 +37,14 @@ export const SubMenuItem = styled.button`
     text-decoration: none;
   }
 `;
+
+export const StyledPopper = styled.div<{isAnimated: boolean}>`
+  ${({ isAnimated, theme }) => isAnimated && css`
+    overflow: hidden;
+    padding: 2px;
+    >* {
+      transition: transform ${theme.animations.duration} ease-out, opacity ${theme.animations.duration} ease-out;
+      animation: ${theme.animations.popper} ${theme.animations.duration} ease-out;
+    }
+  `}
+`

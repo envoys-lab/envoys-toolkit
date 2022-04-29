@@ -1,3 +1,5 @@
+import {Keyframes} from "styled-components";
+
 export type Breakpoints = string[];
 
 export type MediaQueries = {
@@ -95,3 +97,9 @@ export type ZIndices = {
   dropdown: number;
   modal: number;
 };
+
+export type Animations = {
+  duration: string;
+  modal: Keyframes;
+  popper: Keyframes;
+}

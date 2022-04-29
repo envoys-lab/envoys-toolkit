@@ -57,7 +57,7 @@ const StyledButton = styled.button<BaseButtonProps>`
   line-height: 1;
   opacity: ${getOpacity};
   outline: 0;
-  transition: background-color 0.2s, opacity 0.2s;
+  transition: background-color 0.2s, opacity 0.2s, transform 0.2s;
 
   &:hover:not(:disabled):not(.envoys-button--disabled):not(.envoys-button--disabled):not(:active) {
     opacity: 0.65;
@@ -65,7 +65,7 @@ const StyledButton = styled.button<BaseButtonProps>`
 
   &:active:not(:disabled):not(.envoys-button--disabled):not(.envoys-button--disabled) {
     opacity: 0.85;
-    transform: translateY(1px);
+    transform: translateY(1px) scale(0.95);
     box-shadow: none;
   }
 
