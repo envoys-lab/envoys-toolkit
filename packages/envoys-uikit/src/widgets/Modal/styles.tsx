@@ -1,10 +1,11 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Flex from "../../components/Box/Flex";
 import { Box } from "../../components/Box";
 import { ArrowBackIconV2 } from "../../components/Svg";
 import { IconButton } from "../../components/Button";
 import { ModalProps } from "./types";
+import { sideBarMaxWidth, sideBarWidthPercents } from "../Menu/Menu";
 
 export const ModalHeader = styled.div<{ background?: string }>`
   align-items: center;
@@ -50,7 +51,11 @@ export const ModalContainer = styled(Box)<{ minWidth: string }>`
   width: 100%;
   max-height: 100vh;
   z-index: ${({ theme }) => theme.zIndices.modal};
-
+  
+  ${({ theme }) => css`
+    animation: ${theme.animations.modal} ${theme.animations.duration} ease-in;
+  `}
+  
   ${({ theme }) => theme.mediaQueries.xs} {
     width: auto;
     min-width: 90%;
@@ -61,5 +66,9 @@ export const ModalContainer = styled(Box)<{ minWidth: string }>`
     width: auto;
     min-width: ${({ minWidth }) => minWidth};
     max-width: 440px;
+  }
+
+  ${({ theme }) => theme.mediaQueries.lg} {
+    margin-left: min(${sideBarWidthPercents}vw, ${sideBarMaxWidth}px);
   }
 `;

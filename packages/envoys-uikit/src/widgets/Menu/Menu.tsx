@@ -15,7 +15,7 @@ import {Overlay} from "../../components/Overlay";
 
 const TopBarContainer = styled.div`
   position: fixed;
-  z-index: 1002;
+  z-index: ${({ theme }) => theme.zIndices.modal-2};
 
   width: 100%;
 
@@ -67,6 +67,10 @@ const Space = styled.nav`
   height: 60px;
 `;
 
+export const sideBarMinWidth = 290;
+export const sideBarMaxWidth = 448;
+export const sideBarWidthPercents = 24;
+
 const FixedContainer = styled.div<{ isFixed: boolean }>`
   ${({ isFixed, theme }) => isFixed && (`border-right: 1px solid ${theme.colors.panelBorder}`)};
 
@@ -77,9 +81,9 @@ const FixedContainer = styled.div<{ isFixed: boolean }>`
   transition: left 0.2s;
   z-index: 20;
 
-  width: 24%;
-  max-width: 448px;
-  min-width: 290px;
+  width: ${sideBarWidthPercents}%;
+  max-width: ${sideBarMaxWidth}px;
+  min-width: ${sideBarMinWidth}px;
 `;
 
 const Body = styled(Box)`

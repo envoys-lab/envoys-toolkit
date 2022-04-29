@@ -12,5 +12,6 @@ export interface BaseMenuProps {
   fitToComponent?: HTMLElement;
   options?: MenuOptions;
   isOpen?: boolean;
+  isAnimated?: boolean;
   onClose?: () => void;
 }
