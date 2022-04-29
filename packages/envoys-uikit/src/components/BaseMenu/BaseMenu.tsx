@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from "react";
 import { createPortal } from "react-dom";
 import { usePopper } from "react-popper";
-import { ClickableElementContainer, StyledPopper } from "./styles";
+import { ClickableElementContainer } from "./styles";
 import { BaseMenuProps } from "./types";
 import getPortalRoot from "../../util/getPortalRoot";
 
-const BaseMenu: React.FC<BaseMenuProps> = ({ component, isAnimated, fitToComponent, options, children, isOpen = false, onClose }) => {
+const BaseMenu: React.FC<BaseMenuProps> = ({ component, fitToComponent, options, children, isOpen = false, onClose }) => {
   const [targetElement, setTargetElement] = useState<HTMLElement | null>(null);
   const [menuElement, setMenuElement] = useState<HTMLElement | null>(null);
   let placement = options?.placement ?? "bottom";
@@ -71,9 +71,9 @@ const BaseMenu: React.FC<BaseMenuProps> = ({ component, isAnimated, fitToCompone
   });
 
   const menu = (
-    <StyledPopper isAnimated={!!isAnimated} ref={setMenuElement} style={styles.popper} {...attributes.popper}>
+    <div ref={setMenuElement} style={styles.popper} {...attributes.popper}>
       {typeof children === "function" ? children({ toggle, open, close }) : children}
-    </StyledPopper>
+    </div>
   );
 
   const portal = getPortalRoot();

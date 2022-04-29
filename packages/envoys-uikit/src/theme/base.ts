@@ -1,5 +1,4 @@
-import { keyframes } from "styled-components";
-import { MediaQueries, Breakpoints, Spacing, Animations } from "./types";
+import { MediaQueries, Breakpoints, Spacing } from "./types";
 
 export const breakpointMap: { [key: string]: number } = {
   xs: 370,
@@ -51,28 +50,6 @@ const zIndices = {
   modal: 100,
 };
 
-const animations: Animations = {
-  duration: '0.3s',
-  modal: keyframes`
-    0% {
-      transform: scale(0);
-    }
-    100% {
-      transform: scale(1);
-    }
-  `,
-  popper: keyframes`
-    0% {
-      opacity: 0;
-      transform: translateY(-100vh)
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  `
-};
-
 export default {
   siteWidth: 1200,
   breakpoints,
@@ -81,5 +58,4 @@ export default {
   shadows,
   radii,
   zIndices,
-  animations,
 };
