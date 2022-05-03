@@ -4,14 +4,16 @@ import { usePopper } from "react-popper";
 import { ClickableElementContainer, StyledPopper } from "./styles";
 import { BaseMenuProps } from "./types";
 import getPortalRoot from "../../util/getPortalRoot";
+import {useMatchBreakpoints} from "../../hooks";
+import { topBarHeight } from "../../widgets/Menu/Menu";
 
-const BaseMenu: React.FC<BaseMenuProps> = ({ component, isAnimated, fitToComponent, options, children, isOpen = false, onClose }) => {
+const BaseMenu: React.FC<BaseMenuProps> = ({ component, isAnimated, shift, fitToComponent, options, children, isOpen = false, onClose }) => {
   const [targetElement, setTargetElement] = useState<HTMLElement | null>(null);
   const [menuElement, setMenuElement] = useState<HTMLElement | null>(null);
-  let placement = options?.placement ?? "bottom";
-  let offset = options?.offset ?? [0, 10];
+  const placement = options?.placement ?? "bottom";
+  const offset = options?.offset ?? [0, 10];
   const padding = options?.padding ?? { left: 16, right: 16 };
-
+  const { isDesktop } = useMatchBreakpoints();
   const [isMenuOpen, setIsMenuOpen] = useState(isOpen);
 
   const toggle = () => {
@@ -58,10 +60,6 @@ const BaseMenu: React.FC<BaseMenuProps> = ({ component, isAnimated, fitToCompone
     };
   }, [menuElement, targetElement, onClose]);
 
-  if (fitToComponent) {
-    placement = 'bottom-end';
-    offset = [0, 24];
-  }
   const { styles, attributes } = usePopper(targetElement, menuElement, {
     placement,
     modifiers: [
@@ -69,6 +67,37 @@ const BaseMenu: React.FC<BaseMenuProps> = ({ component, isAnimated, fitToCompone
       { name: "preventOverflow", options: { padding } },
     ],
   });
+
+  if (fitToComponent) {
+    let fitLeft;
+    const headerShift = isDesktop ? 0 : topBarHeight;
+    const fitTop = fitToComponent.offsetTop + fitToComponent.offsetHeight + headerShift;
+    let translateX;
+    const popperStyles = styles.popper;
+    if (shift) {
+      if (shift === 'left') {
+        fitLeft = fitToComponent.offsetLeft;
+        translateX = 0;
+      } else if (shift === 'right') {
+        fitLeft = fitToComponent.offsetLeft + fitToComponent.offsetWidth;
+        translateX = -100;
+      } else if (shift === 'center') {
+        fitLeft = fitToComponent.offsetLeft +  + fitToComponent.offsetWidth / 2;
+        translateX = -50;
+      }
+      popperStyles.transform = `translateX(${translateX}%)`
+    } else if (popperStyles.transform) {
+      popperStyles.transform = popperStyles.transform.replace(/(translate\(([\d]+)px,[^\d]?)([\d]+)(px\))/, (match, p1, p2, p3, p4) => {
+        return `${p1}${fitTop}${p4}`
+      })
+    }
+    popperStyles.bottom = 'auto';
+    if (fitLeft !== undefined) {
+      popperStyles.top = fitTop;
+      popperStyles.left = `${fitLeft}px`;
+      popperStyles.bottom = 'auto';
+    }
+  }
 
   const menu = (
     <StyledPopper isAnimated={!!isAnimated} ref={setMenuElement} style={styles.popper} {...attributes.popper}>

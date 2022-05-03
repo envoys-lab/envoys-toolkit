@@ -3,8 +3,8 @@ import { Box, Flex } from "../Box";
 
 export const InlineMenuContainer = styled(Box)`
   background-color: ${({ theme }) => theme.colors.backgroundAlt};
-  border-radius: ${({ theme }) => theme.radii.card};
-  box-shadow: ${({ theme }) => theme.shadows.tooltip};
+  border-radius: ${({ theme }) => theme.radii.default};
+  box-shadow: ${({ theme }) => theme.shadows.level0};
 `;
 
 export const SubMenuContainer = styled(Flex)`
@@ -26,7 +26,7 @@ export const SubMenuItem = styled.button`
   outline: 0;
   cursor: pointer;
   background: transparent;
-  padding: 8px 16px;
+  padding: 8px 16px 25px;
   color: ${({ theme }) => theme.colors.text};
   width: 100%;
   font-size: 16px;
@@ -41,7 +41,7 @@ export const SubMenuItem = styled.button`
 export const StyledPopper = styled.div<{isAnimated: boolean}>`
   ${({ isAnimated, theme }) => isAnimated && css`
     overflow: hidden;
-    padding: 2px;
+    padding: 1px 30px 30px 30px;
     >* {
       transition: transform ${theme.animations.duration} ease-out, opacity ${theme.animations.duration} ease-out;
       animation: ${theme.animations.popper} ${theme.animations.duration} ease-out;

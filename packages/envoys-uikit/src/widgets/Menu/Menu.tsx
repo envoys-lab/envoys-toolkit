@@ -13,13 +13,15 @@ import { BurgerMenu } from "../../components/Svg";
 import IconButton from "../../components/Button/IconButton";
 import {Overlay} from "../../components/Overlay";
 
+export const topBarHeight = 60;
+
 const TopBarContainer = styled.div`
   position: fixed;
   z-index: ${({ theme }) => theme.zIndices.modal-2};
 
   width: 100%;
 
-  height: 60px;
+  height: ${topBarHeight}px;
   background: rgba(255, 255, 255, 1);
   backdrop-filter: blur(50px);
   filter: drop-shadow(0px 4px 10px rgba(200, 200, 200, 0.1));
@@ -34,7 +36,7 @@ const TopBarContainer = styled.div`
 `;
 
 const MenusContainer = styled.div`
-  margin: 0 16px 10px;
+  margin: 0 20px 10px;
 `;
 
 const Wrapper = styled.div`
@@ -52,7 +54,7 @@ const StyledNav = styled.nav<{ isMobile: boolean }>`
   border-bottom: 1px solid ${({ theme }) => theme.colors.cardBorder};
   transform: translate3d(0, 0, 0);
   padding-top: 50px;
-  height: ${({ isMobile }) => (isMobile ? "calc(100% - 60px)" : "100%")};
+  height: ${({ isMobile }) => (isMobile ? `calc(100% - ${topBarHeight}px)` : "100%")};
 `;
 
 const InnerContainer = styled.div`

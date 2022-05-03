@@ -44,7 +44,6 @@ const ResetCSS = createGlobalStyle`
   blockquote:after,
   q:before,
   q:after {
-    content: "";
     content: none;
   }
   table {
@@ -84,7 +83,7 @@ const ResetCSS = createGlobalStyle`
     width: 8px;
   }
   ::-webkit-scrollbar-thumb {
-    background: ${({ theme }) => theme.colors.textSubtle}; 
+    background: rgba(15, 43, 70, 0.2);
     border-radius: 8px;
   }
   ::-webkit-scrollbar-track {

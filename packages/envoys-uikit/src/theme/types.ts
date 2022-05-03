@@ -25,6 +25,7 @@ export type Radii = {
 export type Shadows = {
   level0: string;
   level1: string;
+  connectBtn: string;
   active: string;
   success: string;
   warning: string;

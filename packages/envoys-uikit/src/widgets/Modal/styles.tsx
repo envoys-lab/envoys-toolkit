@@ -68,7 +68,9 @@ export const ModalContainer = styled(Box)<{ minWidth: string }>`
     max-width: 440px;
   }
 
+  /*
   ${({ theme }) => theme.mediaQueries.lg} {
     margin-left: min(${sideBarWidthPercents}vw, ${sideBarMaxWidth}px);
   }
+  */
 `;
