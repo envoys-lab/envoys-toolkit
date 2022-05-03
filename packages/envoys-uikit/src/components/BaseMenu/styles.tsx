@@ -43,8 +43,8 @@ export const StyledPopper = styled.div<{isAnimated: boolean}>`
     overflow: hidden;
     padding: 1px 30px 30px 30px;
     >* {
-      transition: transform ${theme.animations.duration} ease-out, opacity ${theme.animations.duration} ease-out;
-      animation: ${theme.animations.popper} ${theme.animations.duration} ease-out;
+      transition: transform ${theme.animations.duration} ease-in-out, opacity ${theme.animations.duration} ease-in-out;
+      animation: ${theme.animations.popper} ${theme.animations.duration} ease-in-out;
     }
   `}
 `

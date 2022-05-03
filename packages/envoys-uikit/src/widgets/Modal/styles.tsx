@@ -53,7 +53,7 @@ export const ModalContainer = styled(Box)<{ minWidth: string }>`
   z-index: ${({ theme }) => theme.zIndices.modal};
   
   ${({ theme }) => css`
-    animation: ${theme.animations.modal} ${theme.animations.duration} ease-in;
+    animation: ${theme.animations.modal} ${theme.animations.duration} ease-in-out;
   `}
   
   ${({ theme }) => theme.mediaQueries.xs} {

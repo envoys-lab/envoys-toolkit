@@ -53,7 +53,7 @@ const zIndices = {
 };
 
 const animations: Animations = {
-  duration: '0.3s',
+  duration: '0.35s',
   modal: keyframes`
     0% {
       transform: scale(0);

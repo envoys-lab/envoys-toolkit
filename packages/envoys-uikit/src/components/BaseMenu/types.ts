@@ -9,7 +9,7 @@ export interface MenuOptions {
 
 export interface BaseMenuProps {
   component: ReactNode;
-  shift?: 'right' | 'left' | 'center';
+  shift?: string;
   fitToComponent?: HTMLElement;
   options?: MenuOptions;
   isOpen?: boolean;
