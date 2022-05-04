@@ -102,5 +102,6 @@ export type ZIndices = {
 export type Animations = {
   duration: string;
   modal: Keyframes;
+  modalOverlay: Keyframes;
   popper: Keyframes;
 }

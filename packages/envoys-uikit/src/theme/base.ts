@@ -62,6 +62,14 @@ const animations: Animations = {
       transform: scale(1);
     }
   `,
+  modalOverlay: keyframes`
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  `,
   popper: keyframes`
     0% {
       max-height: 0;

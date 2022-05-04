@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import React, { FC, useEffect } from "react";
 import { Box, BoxProps } from "../Box";
 
@@ -8,9 +8,10 @@ const StyledOverlay = styled(Box)<{$noBlur: boolean}>`
   left: 0;
   width: 100%;
   height: 100%;
-  ${({ $noBlur }) => !$noBlur && `
-  backdrop-filter: blur(20px);
-  background: rgba(247, 247, 247, 0.57);
+  ${({ $noBlur, theme }) => !$noBlur && css`
+    backdrop-filter: blur(20px);
+    background: rgba(247, 247, 247, 0.57);
+    animation: ${theme.animations.modalOverlay} ${theme.animations.duration} ease-in-out;
   `}
   z-index: 20;
 `;
