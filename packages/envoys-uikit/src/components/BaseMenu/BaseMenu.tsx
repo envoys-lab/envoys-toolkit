@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import { createPortal } from "react-dom";
 import { usePopper } from "react-popper";
-import { ClickableElementContainer, StyledPopper } from "./styles";
+import {ClickableElementContainer, shadowPadding, StyledPopper} from "./styles";
 import { BaseMenuProps } from "./types";
 import getPortalRoot from "../../util/getPortalRoot";
 import {useMatchBreakpoints} from "../../hooks";
@@ -13,7 +13,7 @@ const BaseMenu: React.FC<BaseMenuProps> = ({ component, isAnimated, shift, fitTo
   const placement = options?.placement ?? "bottom";
   const offset = options?.offset ?? [0, 10];
   const padding = options?.padding ?? { left: 16, right: 16 };
-  const { isDesktop } = useMatchBreakpoints();
+  const { isMobile, isDesktop } = useMatchBreakpoints();
   const [isMenuOpen, setIsMenuOpen] = useState(isOpen);
 
   const toggle = () => {
@@ -70,7 +70,7 @@ const BaseMenu: React.FC<BaseMenuProps> = ({ component, isAnimated, shift, fitTo
 
   if (fitToComponent) {
     let fitLeft;
-    const headerShift = isDesktop ? 0 : topBarHeight;
+    const headerShift = (isDesktop ? 0 : topBarHeight) + (offset[1] || 0);
     const fitTop = fitToComponent.offsetTop + fitToComponent.offsetHeight + headerShift;
     let translateX;
     const popperStyles = styles.popper;
@@ -93,6 +93,7 @@ const BaseMenu: React.FC<BaseMenuProps> = ({ component, isAnimated, shift, fitTo
     }
     popperStyles.bottom = 'auto';
     if (fitLeft !== undefined) {
+      fitLeft += (!isMobile ? shadowPadding : 0) + (offset[0] || 0);
       popperStyles.top = fitTop;
       popperStyles.left = `${fitLeft}px`;
       popperStyles.bottom = 'auto';

@@ -1,6 +1,8 @@
 import styled, { css } from "styled-components";
 import { Box, Flex } from "../Box";
 
+export const shadowPadding = 30;
+
 export const InlineMenuContainer = styled(Box)`
   background-color: ${({ theme }) => theme.colors.backgroundAlt};
   border-radius: ${({ theme }) => theme.radii.default};
@@ -41,7 +43,10 @@ export const SubMenuItem = styled.button`
 export const StyledPopper = styled.div<{isAnimated: boolean}>`
   ${({ isAnimated, theme }) => isAnimated && css`
     overflow: hidden;
-    padding: 1px 30px 30px 30px;
+    padding: 1px ${shadowPadding/2}px ${shadowPadding/2}px;
+    ${theme.mediaQueries.sm} {
+      padding: 1px ${shadowPadding}px ${shadowPadding}px;
+    }
     >* {
       transition: transform ${theme.animations.duration} ease-in-out, opacity ${theme.animations.duration} ease-in-out;
       animation: ${theme.animations.popper} ${theme.animations.duration} ease-in-out;
