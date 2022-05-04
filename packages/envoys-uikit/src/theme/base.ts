@@ -22,6 +22,8 @@ const mediaQueries: MediaQueries = {
   nav: `@media screen and (min-width: ${breakpointMap.lg}px)`,
 };
 
+export const animationDuration = 350;
+
 export const shadows = {
   level0: "0px 10px 20px rgba(0, 0, 0, 0.06)",
   level1: "0px 2px 12px -8px rgba(25, 19, 38, 0.1), 0px 1px 1px rgba(25, 19, 38, 0.05)",
@@ -53,7 +55,7 @@ const zIndices = {
 };
 
 const animations: Animations = {
-  duration: '0.35s',
+  duration: `${animationDuration}ms`,
   modal: keyframes`
     0% {
       transform: scale(0);

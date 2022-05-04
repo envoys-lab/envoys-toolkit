@@ -1,7 +1,8 @@
 import React, { createContext, useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Overlay } from "../../components/Overlay";
 import { Handler } from "./types";
+import { animationDuration } from "../../theme/base";
 
 interface ModalsContext {
   isOpen: boolean;
@@ -13,7 +14,7 @@ interface ModalsContext {
   setCloseOnOverlayClick: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const ModalWrapper = styled.div`
+const ModalWrapper = styled.div<{$isClose: boolean}>`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -24,6 +25,10 @@ const ModalWrapper = styled.div`
   bottom: 0;
   left: 0;
   z-index: ${({ theme }) => theme.zIndices.modal - 1};
+  transition: transform ${({ theme }) => theme.animations.duration} ease-in-out;
+  ${({ $isClose }) => $isClose && css`
+    transform: scale(0);
+  `}
 `;
 
 export const Context = createContext<ModalsContext>({
@@ -37,6 +42,7 @@ export const Context = createContext<ModalsContext>({
 });
 
 const ModalProvider: React.FC = ({ children }) => {
+  const [isClosed, setIsClosed] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [modalNode, setModalNode] = useState<React.ReactNode>();
   const [nodeId, setNodeId] = useState("");
@@ -49,9 +55,13 @@ const ModalProvider: React.FC = ({ children }) => {
   };
 
   const handleDismiss = () => {
-    setModalNode(undefined);
-    setIsOpen(false);
-    setNodeId("");
+    setIsClosed(true);
+    setTimeout(() => {
+      setModalNode(undefined);
+      setIsOpen(false);
+      setIsClosed(false);
+      setNodeId("");
+    }, animationDuration)
   };
 
   const handleOverlayDismiss = () => {
@@ -73,7 +83,7 @@ const ModalProvider: React.FC = ({ children }) => {
       }}
     >
       {isOpen && (
-        <ModalWrapper>
+        <ModalWrapper $isClose={isClosed}>
           <Overlay onClick={handleOverlayDismiss} />
           {React.isValidElement(modalNode) &&
             React.cloneElement(modalNode, {
