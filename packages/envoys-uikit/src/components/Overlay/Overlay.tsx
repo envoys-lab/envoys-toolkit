@@ -41,7 +41,7 @@ export const Overlay: FC<OverlayProps> = ({noBlur = false, ...props}) => {
   return (
     <>
       <BodyLock />
-      <StyledOverlay role="presentation" {...props} $noBlur={noBlur}/>
+      <StyledOverlay id="modal-overlay" role="presentation" {...props} $noBlur={noBlur}/>
     </>
   );
 };

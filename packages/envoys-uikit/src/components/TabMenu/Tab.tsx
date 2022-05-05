@@ -18,6 +18,7 @@ const Tab = styled.button<TabProps>`
     flex-grow: 0;
   }
 
+  transition: color ${({ theme }) => theme.animations.duration} ease-in-out;
   ${color}
 `;
 

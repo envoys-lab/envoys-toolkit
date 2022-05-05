@@ -56,6 +56,7 @@ const zIndices = {
 
 const animations: Animations = {
   duration: `${animationDuration}ms`,
+  durationClose: `${animationDuration / 2}ms`,
   modal: keyframes`
     0% {
       transform: scale(0);

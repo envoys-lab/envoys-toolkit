@@ -29,6 +29,7 @@ export interface EnvoysTheme {
   animations: Animations;
 }
 
+export { animationDuration } from "./base";
 export { darkColors, lightColors } from "./colors";
 export { default as dark } from "./dark";
 export { default as light } from "./light";

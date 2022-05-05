@@ -25,10 +25,23 @@ const ModalWrapper = styled.div<{$isClose: boolean}>`
   bottom: 0;
   left: 0;
   z-index: ${({ theme }) => theme.zIndices.modal - 1};
-  transition: transform ${({ theme }) => theme.animations.duration} ease-in-out;
-  ${({ $isClose }) => $isClose && css`
-    transform: scale(0);
-  `}
+  & > * {
+    transition: opacity ${({ theme }) => theme.animations.duration} ease-in-out, transform ${({ theme }) => theme.animations.duration} ease-in-out;
+  }
+  ${({ $isClose }) => {
+    return $isClose && css`
+      & > * {
+        transition-duration: ${({ theme }) => theme.animations.durationClose};  
+      }
+      & > #modal-overlay {
+        opacity: 0;
+        transition-delay: ${({ theme }) => theme.animations.durationClose};
+      }
+      & > :not(#modal-overlay) {
+        transform: scale(0);
+      }
+  `
+  }}
 `;
 
 export const Context = createContext<ModalsContext>({
