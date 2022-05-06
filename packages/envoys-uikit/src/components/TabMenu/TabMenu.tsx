@@ -77,22 +77,28 @@ const ButtonMenu: React.FC<TabMenuProps> = ({ fixedForItems = 0, nextIndex, acti
 
   useEffect(() => {
     if(wrapperElement) {
-      const childElementsMap: ChildMapItem[] = [];
-      const childNodes = wrapperElement.children;
-      if (childNodes) {
-        Array.from(childNodes).forEach((el) => {
-          if (el.children) {
-            const htmlEl = el.children[0] as HTMLElement;
-            childElementsMap.push({
-              left: htmlEl.offsetLeft,
-              width: htmlEl.offsetWidth
-            })
-          }
-        });
+      const calcMap = () => {
+        const childElementsMap: ChildMapItem[] = [];
+        const childNodes = wrapperElement.children;
+        if (childNodes) {
+          Array.from(childNodes).forEach((el) => {
+            if (el.children) {
+              const htmlEl = el.children[0] as HTMLElement;
+              childElementsMap.push({
+                left: htmlEl.offsetLeft,
+                width: htmlEl.offsetWidth
+              })
+            }
+          });
+        }
+        const newPos = {...childElementsMap[toIndex !== undefined ? toIndex : activeIndex]};
+        setDividerPos(newPos);
       }
-      setDividerPos(childElementsMap[toIndex !== undefined ? toIndex : activeIndex]);
+      new ResizeObserver(calcMap).observe(wrapperElement);
+      calcMap();
     }
-  }, [activeIndex, toIndex, wrapperElement])
+  }, [wrapperElement, toIndex, activeIndex]);
+
   return (
     <Wrapper className={fixedForItems ? 'fix-items': ''}>
       <Inner className={fixedForItems ? 'fix-items': ''} ref={setWrapperElement}>
