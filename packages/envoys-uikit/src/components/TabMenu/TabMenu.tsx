@@ -93,7 +93,6 @@ const ButtonMenu: React.FC<TabMenuProps> = ({ fixedForItems = 0, nextIndex, acti
       setDividerPos(childElementsMap[toIndex !== undefined ? toIndex : activeIndex]);
     }
   }, [activeIndex, toIndex, wrapperElement])
-
   return (
     <Wrapper className={fixedForItems ? 'fix-items': ''}>
       <Inner className={fixedForItems ? 'fix-items': ''} ref={setWrapperElement}>
@@ -103,6 +102,7 @@ const ButtonMenu: React.FC<TabMenuProps> = ({ fixedForItems = 0, nextIndex, acti
           if (!child) {
               return null;
           }
+          const color = ((isActive && nextIndex === undefined) || (index === nextIndex)) ? "basicOrange" : "textSubtle";
           return (
             <Flex style={fixedForItems ? {width: `calc(100% / ${fixedForItems})`}: {}}>
               <TabWrapper verticalMargin={verticalMargin} className={fixedForItems ? 'fix-items': ''}>
@@ -110,7 +110,7 @@ const ButtonMenu: React.FC<TabMenuProps> = ({ fixedForItems = 0, nextIndex, acti
                   isLast,
                   isActive,
                   onClick: onItemClick ? () => onItemClick(index) : undefined,
-                  color: (isActive || (index === nextIndex)) ? "basicOrange" : "textSubtle",
+                  color,
                   backgroundColor: "white",
                 })}
               </TabWrapper>
