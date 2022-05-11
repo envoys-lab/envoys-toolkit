@@ -105,4 +105,5 @@ export type Animations = {
   modal: Keyframes;
   modalOverlay: Keyframes;
   popper: Keyframes;
+  nav: Keyframes;
 }

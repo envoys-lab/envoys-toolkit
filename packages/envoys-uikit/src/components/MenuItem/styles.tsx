@@ -1,5 +1,8 @@
-import styled from "styled-components";
-import { StyledMenuItemProps } from "./types";
+import styled, { css } from "styled-components";
+import { StyledDisabledMenuItemProps, StyledMenuItemProps } from "./types";
+
+export const menuItemHeight = 56;
+export const menuItemHighlightHeight = 30;
 
 export const StyledMenuItemContainer = styled.div<StyledMenuItemProps>`
   position: relative;
@@ -20,6 +23,17 @@ export const StyledMenuItemContainer = styled.div<StyledMenuItemProps>`
     `};
 `;
 
+export const DisabledMenuItem = styled.div<StyledDisabledMenuItemProps>`
+  color: ${({ $targetColor }) => $targetColor};
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: ${menuItemHeight}px;
+  transition: padding-right ${({ theme }) => theme.animations.duration} ease-in-out;
+  padding: 0 16px 0 25px;
+`;
+
 const StyledMenuItem = styled.a<StyledMenuItemProps>`
   position: relative;
   display: flex;
@@ -27,7 +41,6 @@ const StyledMenuItem = styled.a<StyledMenuItemProps>`
 
   color: ${({ theme, $isActive }) => ($isActive ? theme.colors.secondary : theme.colors.textSubtle)};
   font-size: 16px;
-  font-weight: ${({ $isActive }) => ($isActive ? "500" : "500")};
 
   ${({ $statusColor, theme }) =>
     $statusColor &&
@@ -44,34 +57,28 @@ const StyledMenuItem = styled.a<StyledMenuItemProps>`
 
   ${({ $variant }) =>
     $variant === "default"
-      ? `
+        ? css`
     padding: 0 16px 0 25px !important;
-    height: 56px;
+    height: ${menuItemHeight}px;
   `
-      : `
-    padding: 4px 4px 0px 4px;
-    height: 52px;
+        : css`
+    padding: 4px 4px 0 4px;
+    height: ${menuItemHeight - 4}px;
   `}
 
-  &:hover {
-    background: ${({ theme }) => theme.colors.tertiary};
-    ${({ $variant }) => $variant === "default" && "border-radius: 0px;"};
+  &>div:first-of-type {
+    padding-right: ${({ $isActive }) => $isActive ? '9px' : '22px'};
+    transition-property: padding-right, color;
+    transition-duration: ${({ theme }) => theme.animations.duration};
+    transition-timing-function: ease-in-out;
   }
-`;
 
-export const StyledMenuItemSelection = styled.div<StyledMenuItemProps>`
-
-  ${({ $isActive, theme }) =>
-    $isActive && 
-    `
-      width: 4px;
-      height: 30px;
-      background-color: ${theme.colors.secondary};
-      border-radius: 2px;
-
-      position: fixed;
-      right: 0;
-    `};
+  &:hover {
+    ${({ $variant }) => $variant === "default" && "border-radius: 0px;"};
+    &>div:first-of-type {
+      padding-right: 9px;
+    }
+  }
 `;
 
 export default StyledMenuItem;

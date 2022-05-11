@@ -1,3 +1,4 @@
+import { MouseEvent} from "react";
 import { Colors } from "../../theme";
 
 export type MenuItemVariant = "default" | "subMenu";
@@ -7,6 +8,7 @@ export interface MenuItemProps {
   href?: string;
   variant?: MenuItemVariant;
   statusColor?: keyof Colors;
+  onClick?: (e: MouseEvent<HTMLAnchorElement>) => void
 }
 
 export type StyledMenuItemProps = {
@@ -15,6 +17,6 @@ export type StyledMenuItemProps = {
   $statusColor?: keyof Colors;
 };
 
-export type StyledIconContainerProps = {
-  isActive?: boolean;
+export type StyledDisabledMenuItemProps = {
+  $targetColor?: string;
 };

@@ -84,6 +84,18 @@ const animations: Animations = {
       opacity: 1;
       transform: translateY(0);
     }
+  `,
+  nav: keyframes`
+    0% {
+      max-height: 0;
+      opacity: 0;
+      transform: translateX(-100%)
+    }
+    100% {
+      max-height: none;
+      opacity: 1;
+      transform: translateX(0);
+    }
   `
 };
 

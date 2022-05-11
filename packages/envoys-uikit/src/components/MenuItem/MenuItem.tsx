@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
 import { MenuContext } from "../../widgets/Menu/context";
-import StyledMenuItem, { StyledMenuItemContainer, StyledMenuItemSelection } from "./styles";
+import StyledMenuItem, { StyledMenuItemContainer } from "./styles";
 import { MenuItemProps } from "./types";
 
 const MenuItem: React.FC<MenuItemProps> = ({
+  onClick,
   children,
   href,
   isActive = false,
@@ -22,9 +23,8 @@ const MenuItem: React.FC<MenuItemProps> = ({
       };
   return (
     <StyledMenuItemContainer $isActive={isActive} $variant={variant}>
-      <StyledMenuItem {...itemLinkProps} $isActive={isActive} $variant={variant} $statusColor={statusColor} {...props}>
+      <StyledMenuItem onClick={onClick} {...itemLinkProps} $isActive={isActive} $variant={variant} $statusColor={statusColor} {...props}>
         {children}
-        <StyledMenuItemSelection $isActive={isActive} {...props} />
       </StyledMenuItem>
     </StyledMenuItemContainer>
   );
