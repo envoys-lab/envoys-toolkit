@@ -1,17 +1,19 @@
-import React, { useState } from "react";
-import styled, { useTheme } from "styled-components";
-import { Box } from "../../components/Box";
+import React, {MouseEvent, useEffect, useState} from "react";
+import styled, {css, useTheme} from "styled-components";
+import {Box} from "../../components/Box";
 import Flex from "../../components/Box/Flex";
 import MenuItems from "../../components/MenuItems/MenuItems";
-import { useMatchBreakpoints } from "../../hooks";
+import {useMatchBreakpoints} from "../../hooks";
 import Logo from "./components/Logo";
 // import { MENU_HEIGHT, TOP_BANNER_HEIGHT, TOP_BANNER_HEIGHT_MOBILE } from "./config";
-import { NavProps } from "./types";
+import {NavProps} from "./types";
 // import LangSelector from "../../components/LangSelector/LangSelector";
-import { MenuContext } from "./context";
-import { BurgerMenu } from "../../components/Svg";
+import {MenuContext} from "./context";
+import {BurgerMenu} from "../../components/Svg";
 import IconButton from "../../components/Button/IconButton";
 import {Overlay} from "../../components/Overlay";
+import {animationDuration} from "../../theme";
+import {menuItemHeight, menuItemHighlightHeight} from "../../components/MenuItem/styles";
 
 export const topBarHeight = 60;
 
@@ -45,7 +47,7 @@ const Wrapper = styled.div`
   justify-content: flex-end;
 `;
 
-const StyledNav = styled.nav<{ isMobile: boolean }>`
+const StyledNav = styled.nav<{ isMobile: boolean, isClosing: boolean }>`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -55,6 +57,13 @@ const StyledNav = styled.nav<{ isMobile: boolean }>`
   transform: translate3d(0, 0, 0);
   padding-top: 50px;
   height: ${({ isMobile }) => (isMobile ? `calc(100% - ${topBarHeight}px)` : "100%")};
+  ${({isMobile, isClosing, theme}) => isMobile && !isClosing && css`
+    animation: ${theme.animations.nav} ${theme.animations.duration} ease-in-out;
+  `}
+  ${({isMobile, isClosing, theme}) => isMobile && isClosing && css`
+    transition: transform ${theme.animations.duration} ease-in-out;
+    transform: translateX(-100%);
+  `}
 `;
 
 const InnerContainer = styled.div`
@@ -109,6 +118,19 @@ const Inner = styled.div<{ isPushed: boolean; showMenu: boolean }>`
   transform: translate3d(0, 0, 0);
 `;
 
+const ActiveItemHighlight = styled.span`
+  display: block;
+  position: absolute;
+  right: 0;
+  width: 4px;
+  height: ${menuItemHighlightHeight}px;
+  border-radius: 2px;
+  transition-property: top;
+  transition-timing-function: ease-in-out;
+  transition-duration: ${({ theme }) => theme.animations.duration};
+  background: ${({ theme }) => theme.colors.basicOrange};
+`;
+
 const Menu: React.FC<NavProps> = ({
   searchBar,
   linkComponent = "a",
@@ -120,9 +142,21 @@ const Menu: React.FC<NavProps> = ({
   children,
 }) => {
   const [showMenu, setShowMenu] = useState(false);
+  const [openingMenu, setOpeningMenu] = useState(false);
+  const [closingMenu, setClosingMenu] = useState(false);
 
   const onPressSideMenu = () => {
-    setShowMenu(!showMenu);
+    if (showMenu) {
+      setOpeningMenu(false);
+      setClosingMenu(true);
+      setTimeout(() => {
+        setShowMenu(false);
+      }, animationDuration)
+    } else {
+      setClosingMenu(false);
+      setOpeningMenu(true);
+      setShowMenu(true);
+    }
   };
 
   const theme = useTheme();
@@ -136,9 +170,41 @@ const Menu: React.FC<NavProps> = ({
   // Find the home link if provided
   const homeLink = links.find((link) => link.label === "Home");
 
-  const onItemClick = () => {
-    onPressSideMenu();
+  const getHighlightPos = (el: HTMLAnchorElement) => {
+    return (el.parentElement?.offsetTop || 0) + (menuItemHeight - menuItemHighlightHeight) / 2
+  }
+
+  const [wrapperElement, setWrapperElement] = useState<HTMLElement | null>(null)
+  const [highlightTopPos, setHighlightTopPos] = useState<number | undefined>(undefined);
+
+  const onItemClick = (e: MouseEvent<HTMLAnchorElement>) => {
+    const el = e.target as HTMLAnchorElement;
+    if (el) {
+      const newPos = getHighlightPos(el);
+      setHighlightTopPos(newPos);
+      setTimeout(() => {
+        onPressSideMenu();
+      }, animationDuration)
+    }
   };
+
+  useEffect(() => {
+    const moveActiveTabMark = () => {
+      if(wrapperElement) {
+        const el = (wrapperElement as HTMLElement).querySelector(`a[href='${activeItem}']`);
+        if (el) {
+          const initPos = getHighlightPos(el as HTMLAnchorElement);
+          setHighlightTopPos(initPos)
+        }
+      }
+    }
+    moveActiveTabMark();
+    const observer: ResizeObserver = new ResizeObserver(moveActiveTabMark);
+    observer.observe(window.document.body)
+    return () => {
+      observer.disconnect();
+    }
+  }, [links, wrapperElement, activeItem]);
 
   return (
     <MenuContext.Provider value={{ linkComponent }}>
@@ -165,7 +231,7 @@ const Menu: React.FC<NavProps> = ({
           ""
         ) : (
           <FixedContainer isFixed>
-            <StyledNav isMobile={lowResolutionMode}>
+            <StyledNav isMobile={lowResolutionMode} isClosing={showMenu && closingMenu && !openingMenu}  ref={setWrapperElement}>
               <InnerContainer>
                 <Flex flexDirection="column">
                   {lowResolutionMode ? (
@@ -197,6 +263,7 @@ const Menu: React.FC<NavProps> = ({
                   />
                 </InnerContainer>
               </BottomMenuWrapper>
+              {highlightTopPos !== undefined && <ActiveItemHighlight style={{ top: highlightTopPos }} />}
             </StyledNav>
           </FixedContainer>
         )}

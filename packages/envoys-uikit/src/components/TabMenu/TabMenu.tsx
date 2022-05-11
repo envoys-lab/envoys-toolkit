@@ -76,8 +76,8 @@ const ButtonMenu: React.FC<TabMenuProps> = ({ fixedForItems = 0, nextIndex, acti
   const [dividerPos, setDividerPos] = useState<ChildMapItem | null>(null);
 
   useEffect(() => {
-    if(wrapperElement) {
-      const calcMap = () => {
+    const calcMap = () => {
+      if(wrapperElement) {
         const childElementsMap: ChildMapItem[] = [];
         const childNodes = wrapperElement.children;
         if (childNodes) {
@@ -94,8 +94,14 @@ const ButtonMenu: React.FC<TabMenuProps> = ({ fixedForItems = 0, nextIndex, acti
         const newPos = {...childElementsMap[toIndex !== undefined ? toIndex : activeIndex]};
         setDividerPos(newPos);
       }
-      new ResizeObserver(calcMap).observe(wrapperElement);
-      calcMap();
+    }
+    const observer: ResizeObserver = new ResizeObserver(calcMap);
+    calcMap();
+    if (wrapperElement) {
+      observer.observe(wrapperElement);
+    }
+    return () => {
+      observer.disconnect();
     }
   }, [wrapperElement, toIndex, activeIndex]);
 

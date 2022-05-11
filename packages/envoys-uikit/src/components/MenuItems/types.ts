@@ -1,3 +1,4 @@
+import React, { MouseEvent } from "react";
 import { BoxProps } from "../Box";
 import { DropdownMenuItems } from "../DropdownMenu/types";
 import { SvgProps } from "../Svg";
@@ -18,13 +19,5 @@ export interface MenuItemsProps extends BoxProps {
   items: MenuItemsType[];
   activeItem?: string;
   activeSubItem?: string;
-  onItemClick?: () => void;
+  onItemClick?: (e: MouseEvent<HTMLAnchorElement>) => void;
 }
-
-export type StyledIconContainerProps = {
-  $isActive?: boolean;
-};
-
-export type StyledDisabledMenuItemProps = {
-  $targetColor?: string;
-};
