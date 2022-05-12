@@ -23,6 +23,7 @@ const mediaQueries: MediaQueries = {
 };
 
 export const animationDuration = 350;
+export const animationDurationConnect = 750;
 
 export const shadows = {
   level0: "0px 10px 20px rgba(0, 0, 0, 0.06)",
@@ -56,6 +57,7 @@ const zIndices = {
 
 const animations: Animations = {
   duration: `${animationDuration}ms`,
+  durationConnect: `${animationDurationConnect}ms`,
   durationClose: `${animationDuration / 2}ms`,
   modal: keyframes`
     0% {

@@ -2,14 +2,15 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import { createPortal } from "react-dom";
 import { usePopper } from "react-popper";
 import { ThemeProvider, DefaultTheme } from "styled-components";
-import { light, dark } from "../../theme";
+import {light, dark, animationDuration} from "../../theme";
 import isTouchDevice from "../../util/isTouchDevice";
 import { StyledTooltip, Arrow } from "./StyledTooltip";
 import { TooltipOptions, TooltipRefs } from "./types";
 import getPortalRoot from "../../util/getPortalRoot";
 
+// rollback this nonsense
 const invertTheme = (currentTheme: DefaultTheme) => {
-  if (currentTheme.isDark) {
+  if (!currentTheme.isDark) {
     return light;
   }
   return dark;
@@ -28,6 +29,7 @@ const useTooltip = (content: React.ReactNode, options: TooltipOptions): TooltipR
   const [arrowElement, setArrowElement] = useState<HTMLElement | null>(null);
 
   const [visible, setVisible] = useState(false);
+  const [closing, setClosing] = useState(false);
   const isHoveringOverTooltip = useRef(false);
   const hideTimeout = useRef<number>();
 
@@ -36,7 +38,11 @@ const useTooltip = (content: React.ReactNode, options: TooltipOptions): TooltipR
       const hide = () => {
         e.stopPropagation();
         e.preventDefault();
-        setVisible(false);
+        setClosing(true);
+        setTimeout(() => {
+          setVisible(false);
+          setClosing(false);
+        }, animationDuration);
       };
 
       if (trigger === "hover") {
@@ -64,6 +70,7 @@ const useTooltip = (content: React.ReactNode, options: TooltipOptions): TooltipR
     (e: Event) => {
       e.stopPropagation();
       e.preventDefault();
+      setClosing(false);
       setVisible(true);
       if (trigger === "hover") {
         if (e.target === targetElement) {
@@ -82,7 +89,13 @@ const useTooltip = (content: React.ReactNode, options: TooltipOptions): TooltipR
   const toggleTooltip = useCallback(
     (e: Event) => {
       e.stopPropagation();
-      setVisible(!visible);
+      if (visible) {
+        setClosing(true);
+      }
+      setTimeout(() => {
+        setVisible(!visible);
+        setClosing(false);
+      }, animationDuration);
     },
     [visible]
   );
@@ -139,7 +152,11 @@ const useTooltip = (content: React.ReactNode, options: TooltipOptions): TooltipR
           !tooltipElement.contains(target) &&
           !targetElement.contains(target)
         ) {
-          setVisible(false);
+          setClosing(true);
+          setTimeout(() => {
+            setVisible(false);
+            setClosing(false);
+          }, animationDuration);
         }
       }
     };
@@ -183,7 +200,7 @@ const useTooltip = (content: React.ReactNode, options: TooltipOptions): TooltipR
   });
 
   const tooltip = (
-    <StyledTooltip ref={setTooltipElement} style={styles.popper} {...attributes.popper}>
+    <StyledTooltip ref={setTooltipElement} style={styles.popper} isVisible={visible} isClosing={closing} {...attributes.popper}>
       <ThemeProvider theme={invertTheme}>{content}</ThemeProvider>
       <Arrow ref={setArrowElement} style={styles.arrow} />
     </StyledTooltip>

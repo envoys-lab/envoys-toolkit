@@ -25,6 +25,7 @@ export const StyledUserMenu = styled(Flex)`
 
 export const IconContainer = styled.div`
   width: 24px;
+  line-height: 0;
 `;
 
 export const LabelText = styled.div`
@@ -35,8 +36,6 @@ export const LabelText = styled.div`
 `;
 
 const Menu = styled.div<{ isOpen: boolean }>`
-  background-color: ${({ theme }) => theme.card.background};
-
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.06);
   backdrop-filter: blur(40px);
 
