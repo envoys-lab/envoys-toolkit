@@ -48,6 +48,7 @@ const Wrapper = styled.div`
 `;
 
 const StyledNav = styled.nav<{ isMobile: boolean, isClosing: boolean }>`
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -68,6 +69,8 @@ const StyledNav = styled.nav<{ isMobile: boolean, isClosing: boolean }>`
 
 const InnerContainer = styled.div`
   width: 290px;
+  flex: 1;
+  height: 100%;
 `;
 
 const LogoSeparator = styled.nav`
@@ -129,6 +132,9 @@ const ActiveItemHighlight = styled.span`
   transition-timing-function: ease-in-out;
   transition-duration: ${({ theme }) => theme.animations.duration};
   background: ${({ theme }) => theme.colors.basicOrange};
+  animation: ${({ theme }) => theme.animations.modalOverlay};
+  animation-duration: ${({ theme }) => theme.animations.duration};
+  animation-timing-function: ease-in-out;
 `;
 
 const Menu: React.FC<NavProps> = ({
@@ -170,8 +176,25 @@ const Menu: React.FC<NavProps> = ({
   // Find the home link if provided
   const homeLink = links.find((link) => link.label === "Home");
 
-  const getHighlightPos = (el: HTMLAnchorElement) => {
-    return (el.parentElement?.offsetTop || 0) + (menuItemHeight - menuItemHighlightHeight) / 2
+  const getHighlightPos = (el: HTMLAnchorElement, isLowRes = false) => {
+    const getOffsetTop = (targetElement: HTMLAnchorElement) => {
+      if (!isLowRes) {
+        return (el.parentElement?.offsetTop || 0) + (menuItemHeight - menuItemHighlightHeight) / 2;
+      }
+      let element: HTMLAnchorElement = targetElement;
+      let offsetTop = -50; // container height
+      let looping = true;
+      while(looping) {
+        offsetTop += element.offsetTop;
+        if (element.offsetParent) {
+          element = element.offsetParent as HTMLAnchorElement;
+        } else {
+          looping = false;
+        }
+      }
+      return offsetTop;
+    }
+    return getOffsetTop(el);
   }
 
   const [wrapperElement, setWrapperElement] = useState<HTMLElement | null>(null)
@@ -193,8 +216,15 @@ const Menu: React.FC<NavProps> = ({
       if(wrapperElement) {
         const el = (wrapperElement as HTMLElement).querySelector(`a[href='${activeItem}']`);
         if (el) {
-          const initPos = getHighlightPos(el as HTMLAnchorElement);
-          setHighlightTopPos(initPos)
+          if (lowResolutionMode) {
+            setTimeout(() => {
+              const initPos = getHighlightPos(el as HTMLAnchorElement, true);
+              setHighlightTopPos(initPos);
+            }, animationDuration);
+          } else {
+            const initPos = getHighlightPos(el as HTMLAnchorElement);
+            setHighlightTopPos(initPos);
+          }
         }
       }
     }
@@ -204,7 +234,7 @@ const Menu: React.FC<NavProps> = ({
     return () => {
       observer.disconnect();
     }
-  }, [links, wrapperElement, activeItem]);
+  }, [links, wrapperElement, activeItem, lowResolutionMode]);
 
   return (
     <MenuContext.Provider value={{ linkComponent }}>
@@ -230,8 +260,8 @@ const Menu: React.FC<NavProps> = ({
         {lowResolutionMode && !showMenu ? (
           ""
         ) : (
-          <FixedContainer isFixed>
-            <StyledNav isMobile={lowResolutionMode} isClosing={showMenu && closingMenu && !openingMenu}  ref={setWrapperElement}>
+          <FixedContainer isFixed ref={setWrapperElement}>
+            <StyledNav isMobile={lowResolutionMode} isClosing={showMenu && closingMenu && !openingMenu}>
               <InnerContainer>
                 <Flex flexDirection="column">
                   {lowResolutionMode ? (
