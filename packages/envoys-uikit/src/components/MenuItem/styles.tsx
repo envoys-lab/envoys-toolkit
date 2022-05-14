@@ -32,6 +32,9 @@ export const DisabledMenuItem = styled.div<StyledDisabledMenuItemProps>`
   height: ${menuItemHeight}px;
   transition: padding-right ${({ theme }) => theme.animations.duration} ease-in-out;
   padding: 0 16px 0 25px;
+  &>div:first-of-type {
+    padding-right: 22px;
+  }
 `;
 
 const StyledMenuItem = styled.a<StyledMenuItemProps>`
