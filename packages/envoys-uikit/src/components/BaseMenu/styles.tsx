@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 import { Box, Flex } from "../Box";
 
-export const shadowPadding = 30;
+export const shadowPadding = 28;
 
 export const InlineMenuContainer = styled(Box)`
   background-color: ${({ theme }) => theme.colors.backgroundAlt};

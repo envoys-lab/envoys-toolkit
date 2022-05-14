@@ -85,14 +85,21 @@ export const sideBarMinWidth = 290;
 export const sideBarMaxWidth = 448;
 export const sideBarWidthPercents = 24;
 
-const FixedContainer = styled.div<{ isFixed: boolean }>`
-  ${({ isFixed, theme }) => isFixed && (`border-right: 1px solid ${theme.colors.panelBorder}`)};
-
+const FixedContainer = styled.div<{ isFixed: boolean, isShown?: boolean }>`
+  ${({ isShown }) => !isShown && css`
+    z-index: -1 !important;
+    left: -100vw !important;
+  `};
+  ${({ isFixed, theme }) => isFixed && css`
+    >div {
+      border-right: 1px solid ${theme.colors.panelBorder};
+    }
+  `};
   position: ${({ isFixed }) => (isFixed ? "fixed" : "relative")};
   height: 100%;
 
   left: 0;
-  transition: left 0.2s;
+  transition: left ${({ theme }) => theme.animations.duration};
   z-index: 20;
 
   width: ${sideBarWidthPercents}%;
@@ -257,46 +264,42 @@ const Menu: React.FC<NavProps> = ({
       )}
 
       <Wrapper>
-        {lowResolutionMode && !showMenu ? (
-          ""
-        ) : (
-          <FixedContainer isFixed ref={setWrapperElement}>
-            <StyledNav isMobile={lowResolutionMode} isClosing={showMenu && closingMenu && !openingMenu}>
+        <FixedContainer isFixed ref={setWrapperElement} isShown={!(lowResolutionMode && !showMenu)}>
+          <StyledNav isMobile={lowResolutionMode} isClosing={showMenu && closingMenu && !openingMenu}>
+            <InnerContainer>
+              <Flex flexDirection="column">
+                {lowResolutionMode ? (
+                  <></>
+                ) : (
+                  <>
+                    <LogoContainer>
+                      <Logo isDark={isDark} href={homeLink?.href ?? "/"} />
+                    </LogoContainer>
+                    <LogoSeparator />
+                  </>
+                )}
+                <MenuItems
+                  onItemClick={onItemClick}
+                  items={topItems}
+                  activeItem={activeItem}
+                  activeSubItem={activeSubItem}
+                />
+              </Flex>
+            </InnerContainer>
+            <BottomMenuWrapper>
               <InnerContainer>
-                <Flex flexDirection="column">
-                  {lowResolutionMode ? (
-                    <></>
-                  ) : (
-                    <>
-                      <LogoContainer>
-                        <Logo isDark={isDark} href={homeLink?.href ?? "/"} />
-                      </LogoContainer>
-                      <LogoSeparator />
-                    </>
-                  )}
-                  <MenuItems
-                    onItemClick={onItemClick}
-                    items={topItems}
-                    activeItem={activeItem}
-                    activeSubItem={activeSubItem}
-                  />
-                </Flex>
+                <MenusContainer>{globalMenu}</MenusContainer>
+                <MenuItems
+                  onItemClick={onItemClick}
+                  items={bottomItems}
+                  activeItem={activeItem}
+                  activeSubItem={activeSubItem}
+                />
               </InnerContainer>
-              <BottomMenuWrapper>
-                <InnerContainer>
-                  <MenusContainer>{globalMenu}</MenusContainer>
-                  <MenuItems
-                    onItemClick={onItemClick}
-                    items={bottomItems}
-                    activeItem={activeItem}
-                    activeSubItem={activeSubItem}
-                  />
-                </InnerContainer>
-              </BottomMenuWrapper>
-              {highlightTopPos !== undefined && <ActiveItemHighlight style={{ top: highlightTopPos }} />}
-            </StyledNav>
-          </FixedContainer>
-        )}
+            </BottomMenuWrapper>
+            {highlightTopPos !== undefined && <ActiveItemHighlight style={{ top: highlightTopPos }} />}
+          </StyledNav>
+        </FixedContainer>
         {!lowResolutionMode ? <FixedContainer isFixed={false} /> : ""}
         <Body>
           {searchBar}

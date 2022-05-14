@@ -18,7 +18,9 @@ const MenuItems: React.FC<MenuItemsProps> = ({ items = [], activeItem, activeSub
         const linkProps = /* isTouchDevice() && menuItems && menuItems.length > 0 ? {} : */ { href };
         return active === false ? (
           <DisabledMenuItem key={`${label}#${href}`} $targetColor={theme.colors.disabledMenuItem}>
-            <div>{Icon ? <Icon color={theme.colors.disabledMenuItem} /> : ""}</div>
+            <div>
+              {Icon ? <Icon color={theme.colors.disabledMenuItem} /> : ""}
+            </div>
             {label}
           </DisabledMenuItem>
         ) : (
