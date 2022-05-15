@@ -98,6 +98,10 @@ const UserMenu: React.FC<UserMenuProps> = ({
     };
   }, [targetRef, tooltipRef, setIsOpen]);
 
+  // dirty hack to prevent sidebar menu shift
+  const stylesPopper = styles.popper;
+  stylesPopper.transform = "translate(0px, -56px)";
+
   return (
     <Flex alignItems="center" height="100%" ref={setTargetRef} {...props}>
       <StyledUserMenu
@@ -108,7 +112,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
         <LabelText title={text || account}>{text || accountEllipsis}</LabelText>
         <IconContainer>{LeftSideIcon ? <LeftSideIcon /> : ""}</IconContainer>
       </StyledUserMenu>
-      <Menu style={styles.popper} ref={setTooltipRef} {...attributes.popper} isOpen={isOpen}>
+      <Menu style={stylesPopper} ref={setTooltipRef} {...attributes.popper} isOpen={isOpen}>
         <Box onClick={() => setIsOpen(false)} p="0" m="0">
           {children}
         </Box>
