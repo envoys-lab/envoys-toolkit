@@ -119,7 +119,7 @@ const BottomMenuWrapper = styled(Flex)`
 `;
 
 const LogoContainer = styled(Flex)`
-  padding: 0 16px 0 25px;
+  padding: 0 12px;
 `;
 
 const Inner = styled.div<{ isPushed: boolean; showMenu: boolean }>`
