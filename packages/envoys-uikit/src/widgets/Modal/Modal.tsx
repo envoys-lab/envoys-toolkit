@@ -16,11 +16,12 @@ const Modal: React.FC<ModalProps> = ({
   bodyPadding = "24px",
   headerBackground = "transparent",
   minWidth = "320px",
+  maxWidth= "440px",
   ...props
 }) => {
   const theme = useTheme();
   return (
-    <ModalContainer minWidth={minWidth} {...props}>
+    <ModalContainer minWidth={minWidth} maxWidth={maxWidth} {...props}>
       <ModalHeader background={getThemeValue(`colors.${headerBackground}`, headerBackground)(theme)}>
         <ModalTitle>
           <Heading>{title}</Heading>
