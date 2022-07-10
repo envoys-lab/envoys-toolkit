@@ -31,17 +31,20 @@ interface StyledProgressProps {
   variant: ProgressProps["variant"];
   scale: ProgressProps["scale"];
   $useDark: boolean;
+  $withShadow?: boolean;
 }
 
 const StyledProgress = styled.div<StyledProgressProps>`
   position: relative;
   background-color: ${({ theme, $useDark }) => ($useDark ? theme.colors.input : lightColors.input)};
-  box-shadow: ${({ theme }) => theme.shadows.inset};
+  box-shadow: ${({ theme, $withShadow }) => ($withShadow && theme.shadows.inset)};
   overflow: hidden;
 
   ${Bar} {
     border-top-left-radius: ${({ variant }) => (variant === variants.FLAT ? "0" : "32px")};
     border-bottom-left-radius: ${({ variant }) => (variant === variants.FLAT ? "0" : "32px")};
+    border-top-right-radius: ${({ variant }) => (variant === variants.ALL_ROUND ? "32px": "0")};
+    border-bottom-right-radius: ${({ variant }) => (variant === variants.ALL_ROUND ? "32px": "0")};
   }
 
   ${StyledSystemVariant({
@@ -53,5 +56,8 @@ const StyledProgress = styled.div<StyledProgressProps>`
   })}
   ${space}
 `;
+StyledProgress.defaultProps = {
+  $withShadow: true
+}
 
 export default StyledProgress;

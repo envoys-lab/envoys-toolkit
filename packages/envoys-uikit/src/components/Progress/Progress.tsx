@@ -17,16 +17,18 @@ const stepGuard = (step: number) => {
 };
 
 const Progress: React.FC<ProgressProps> = ({
+  barColor,
   variant = variants.ROUND,
   scale = scales.MD,
   primaryStep = 0,
   secondaryStep = null,
   showProgressBunny = false,
   useDark = true,
+  withShadow = true,
   children,
 }) => {
   return (
-    <StyledProgress $useDark={useDark} variant={variant} scale={scale}>
+    <StyledProgress $useDark={useDark} $withShadow={withShadow} variant={variant} scale={scale}>
       {children || (
         <>
           {showProgressBunny && (
@@ -34,7 +36,7 @@ const Progress: React.FC<ProgressProps> = ({
               <ProgressBunny />
             </ProgressBunnyWrapper>
           )}
-          <Bar $useDark={useDark} primary style={{ width: `${stepGuard(primaryStep)}%` }} />
+          <Bar $useDark={useDark} primary style={{ width: `${stepGuard(primaryStep)}%` }} $background={barColor} />
           {secondaryStep ? <Bar $useDark={useDark} style={{ width: `${stepGuard(secondaryStep)}%` }} /> : null}
         </>
       )}
