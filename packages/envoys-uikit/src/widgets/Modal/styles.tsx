@@ -43,7 +43,7 @@ export const ModalBackButton: React.FC<{ onBack: ModalProps["onBack"] }> = ({ on
   );
 };
 
-export const ModalContainer = styled(Box)<{ minWidth: string, maxWidth: string }>`
+export const ModalContainer = styled(Box)<{ minWidth?: string, maxWidth?: string }>`
   overflow: hidden;
   background: ${({ theme }) => theme.modal.background};
   box-shadow: 0 20px 36px -8px rgba(14, 14, 44, 0.1), 0 1px 1px rgba(0, 0, 0, 0.05);
@@ -64,7 +64,7 @@ export const ModalContainer = styled(Box)<{ minWidth: string, maxWidth: string }
 
   ${({ theme }) => theme.mediaQueries.sm} {
     width: auto;
-    min-width: ${({ minWidth }) => minWidth};
+    min-width: ${({ minWidth }) => minWidth || '320px'};
     max-width: ${({ maxWidth }) => maxWidth || '440px'};
   }
 
